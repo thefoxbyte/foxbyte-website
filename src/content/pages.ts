@@ -1,4 +1,5 @@
 import type { PageContent } from "./types";
+import { site } from "./site";
 
 const repo = "https://github.com/thefoxbyte/foxbyte";
 const install = { label: "Install FoxByte", href: "/download", primary: true };
@@ -354,7 +355,7 @@ export const docsPage: PageContent = {
       eyebrow: "Quickstart",
       title: "From nothing to a branch in four commands",
       body: "After setup the console opens by itself with a one-time setup token in the link. main already has three small sample tables, so there is something to branch straight away.",
-      lines: ["$ curl -fsSL https://raw.githubusercontent.com/thefoxbyte/foxbyte/main/deploy/install.sh | sh", "$ fox setup", "$ fox branch create qa", "$ psql \"postgresql://dbadmin:<API_KEY>@localhost:6432/qa?sslmode=require\""],
+      lines: [`$ ${site.install}`, "$ fox setup", "$ fox branch create qa", "$ psql \"postgresql://dbadmin:<API_KEY>@localhost:6432/qa?sslmode=require\""],
     },
     {
       kind: "grid",

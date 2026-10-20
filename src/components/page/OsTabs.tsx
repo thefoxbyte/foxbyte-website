@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence } from "motion/react";
 import * as m from "motion/react-m";
+import { site } from "@/content/site";
 import { copyText } from "@/lib/scroll";
 import styles from "./OsTabs.module.css";
 
@@ -13,21 +14,21 @@ const systems: { id: Os; label: string; shell: string; lines: string[]; note: st
     id: "macos",
     label: "macOS",
     shell: "Terminal",
-    lines: ["brew install lima", "curl -fsSL https://raw.githubusercontent.com/thefoxbyte/foxbyte/main/deploy/install.sh | sh", "fox setup"],
+    lines: ["brew install lima", site.install, "fox setup"],
     note: "fox setup creates a dedicated Lima VM with Docker and ZFS and brings everything up. The first run downloads Ubuntu, which takes a few minutes.",
   },
   {
     id: "linux",
     label: "Linux",
     shell: "Shell",
-    lines: ["curl -fsSL https://raw.githubusercontent.com/thefoxbyte/foxbyte/main/deploy/install.sh | sh", "sudo fox start"],
+    lines: [site.install, "sudo fox start"],
     note: "The engine runs natively, with no VM. ZFS and Docker are provisioned on first start, and services listen on 127.0.0.1 only.",
   },
   {
     id: "windows",
     label: "Windows",
     shell: "PowerShell",
-    lines: ["irm https://raw.githubusercontent.com/thefoxbyte/foxbyte/main/deploy/install.ps1 | iex"],
+    lines: [site.installWindows],
     note: "Run it in PowerShell, not Command Prompt. It installs WSL if needed, brings its own dedicated distro with btrfs, and runs fox setup. Your other WSL distros and Docker Desktop are untouched.",
   },
 ];

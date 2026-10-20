@@ -9,6 +9,7 @@ export const site = {
   github: "https://github.com/thefoxbyte/foxbyte",
   contact: "/contact",
   install: "curl -fsSL https://get.thefoxbyte.com/install.sh | sh",
+  installWindows: "irm https://get.thefoxbyte.com/install.ps1 | iex",
   keywords: [
     "PostgreSQL",
     "Postgres branching",

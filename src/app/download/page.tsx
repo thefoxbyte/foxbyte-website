@@ -3,6 +3,7 @@ import { CtaBand } from "@/components/page/CtaBand";
 import { OsTabs } from "@/components/page/OsTabs";
 import { PageHero } from "@/components/page/PageHero";
 import type { Block } from "@/content/types";
+import { site } from "@/content/site";
 import { pageMetadata } from "@/lib/metadata";
 
 export const metadata = pageMetadata({
@@ -45,7 +46,7 @@ const blocks: Block[] = [
     eyebrow: "Enterprise",
     title: "Install the Enterprise edition",
     body: "The same engine with the Enterprise features compiled in. Without a licence it behaves exactly like Standard, and you can switch an existing install in place.",
-    lines: ["$ curl -fsSL https://raw.githubusercontent.com/thefoxbyte/foxbyte/main/deploy/install.sh | FOX_EDITION=enterprise sh", "$ fox upgrade --edition enterprise"],
+    lines: [`$ ${site.install.replace(/\| sh$/, "| FOX_EDITION=enterprise sh")}`, "$ fox upgrade --edition enterprise"],
   },
   {
     kind: "code",
