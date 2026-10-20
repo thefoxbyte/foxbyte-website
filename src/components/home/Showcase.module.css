@@ -1,0 +1,62 @@
+.showcase {
+  overflow: hidden;
+}
+
+.tabs {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+
+.tab {
+  padding: 9px 16px;
+  border-radius: 999px;
+  font-size: 14.5px;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.tab:hover {
+  border-color: var(--fg);
+  color: var(--fg);
+}
+
+.on,
+.on:hover {
+  background: var(--fg);
+  color: var(--bg);
+  border-color: var(--fg);
+}
+
+.persp {
+  perspective: 1400px;
+}
+
+.frame {
+  border-radius: 22px;
+  padding: 10px;
+  background: var(--navy);
+  box-shadow: 0 60px 120px -40px var(--shadow);
+  transform-origin: center top;
+}
+
+.frameIn {
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  aspect-ratio: 3024 / 2000;
+  background: #141922;
+}
+
+.shot {
+  position: absolute;
+  inset: 0;
+}
+
+.shot img {
+  object-fit: cover;
+  object-position: top;
+}

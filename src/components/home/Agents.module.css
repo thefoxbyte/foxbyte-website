@@ -1,0 +1,66 @@
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 64px;
+  align-items: center;
+}
+
+.copy {
+  display: grid;
+  gap: 22px;
+}
+
+.points {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 16px;
+}
+
+.points li {
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  gap: 14px;
+  font-size: 16.5px;
+}
+
+.points svg {
+  margin-top: 3px;
+}
+
+.loop {
+  display: flex;
+  align-items: center;
+  margin-top: 28px;
+  flex-wrap: wrap;
+  row-gap: 10px;
+}
+
+.loop span {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 12.5px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  transition: all 0.3s;
+}
+
+.loop .on {
+  border-color: var(--coral);
+  color: var(--fg);
+  background: rgba(238, 108, 77, 0.12);
+}
+
+.loop i {
+  width: 22px;
+  height: 1px;
+  background: var(--line);
+}
+
+@media (max-width: 1020px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

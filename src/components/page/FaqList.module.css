@@ -1,0 +1,49 @@
+.faq {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.q {
+  border-bottom: 1px solid var(--line);
+}
+
+.q h3 {
+  font-size: inherit;
+  letter-spacing: normal;
+  line-height: inherit;
+}
+
+.q button {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  align-items: center;
+  text-align: left;
+  padding: 24px 0;
+  font-family: var(--font-display), ui-sans-serif, sans-serif;
+  font-weight: 600;
+  font-size: clamp(18px, 2vw, 21px);
+}
+
+.pm {
+  flex: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  display: grid;
+  place-items: center;
+  color: var(--accent-ink);
+}
+
+.ans {
+  overflow: hidden;
+}
+
+.ans p {
+  padding-bottom: 24px;
+  color: var(--muted);
+  font-size: 17px;
+  max-width: 68ch;
+}

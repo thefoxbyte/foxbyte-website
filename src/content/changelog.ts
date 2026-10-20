@@ -1,0 +1,130 @@
+export type Release = { version: string; date: string; title: string; items: string[] };
+
+export const releases: Release[] = [
+  {
+    version: "Unreleased",
+    date: "On main",
+    title: "Guardrails by impact, and a better SQL workbench",
+    items: [
+      "Agent guardrails count rows changed, not WHERE clauses: a per-table limit on an agent’s UPDATE or DELETE, and a per-agent row budget over a time window (fox guardrail).",
+      "Blackbox anchors can be kept in an Object Lock bucket (fox blackbox anchor-target), and fox-verify reads them from there.",
+      "Copy results as TSV, CSV, Markdown, JSON or INSERTs, and stream a full result to CSV, JSON or Excel with fox export.",
+      "Per-person query history, never the results, with saved queries and suggestions as you type (fox history).",
+      "An object browser with each object’s CREATE script (fox schema), and a data grid to sort, filter and edit rows.",
+      "Fixes: a branch in use is no longer suspended, and Realtime wakes a suspended branch.",
+    ],
+  },
+  {
+    version: "v2.2.1",
+    date: "2026-10-15",
+    title: "Switch editions in place",
+    items: ["fox upgrade --edition enterprise or standard, with the licence shown and accepted first; data untouched.", "Install Enterprise from the console."],
+  },
+  {
+    version: "v2.2",
+    date: "2026-10-15",
+    title: "High availability across machines",
+    items: [
+      "A standby on another machine, replicating over TLS, with automatic failover behind a witness and failover drills.",
+      "Opt-in zero-data-loss mode with synchronous commit, and read-only sessions served by the standby.",
+      "Realtime subscribers keep their place through a failover.",
+      "Cross-site request refusal, browser security headers, and imports and pipelines that run as the requesting account.",
+      "A warning when backups share the database’s disk.",
+    ],
+  },
+  {
+    version: "v2.1.1 – v2.1.2",
+    date: "2026-10-10 – 2026-10-11",
+    title: "Fixes",
+    items: ["A fix for a console Realtime crash.", "Activate a licence from the console."],
+  },
+  {
+    version: "v2.1",
+    date: "2026-10-10",
+    title: "Realtime for applications",
+    items: [
+      "fox realtime doctor and prepare make tables ready to stream, recorded in the Blackbox.",
+      "A front door at /realtime/v1 with fox-realtime:// connection strings and stream-only keys.",
+      "Transaction framing with ?transactions=1, and an activity meter (fox realtime activity).",
+      "The TypeScript and Python SDKs can subscribe to the feed.",
+    ],
+  },
+  {
+    version: "v2.0.1",
+    date: "2026-10-08",
+    title: "Maintenance",
+    items: ["Toolchain and release tooling updates."],
+  },
+  {
+    version: "v2.0",
+    date: "2026-10-07",
+    title: "Enterprise, and the Realtime change feed",
+    items: [
+      "Signed licence files and evaluation licences.",
+      "The Realtime row-level change feed, with a stream route and a console page.",
+      "Writing signed anchors, writing policy rules, impact analysis, change requests, Blackbox export and pipelines move to Enterprise. Checking stays free.",
+    ],
+  },
+  {
+    version: "v1.0.1 – v1.0.4",
+    date: "2026-10-03 – 2026-10-05",
+    title: "Polish",
+    items: ["Older installs can update again, and the installers can no longer hang on a download.", "The new FoxByte logo everywhere."],
+  },
+  {
+    version: "v1.0",
+    date: "2026-10-03",
+    title: "Two editions from one tree",
+    items: [
+      "Standard and Enterprise, built from the same source.",
+      "The SQL console becomes a workbench: multi-statement scripts, line numbers and error positions.",
+      "Session tokens are hashed at rest.",
+    ],
+  },
+  {
+    version: "v0.5",
+    date: "2026-09-29",
+    title: "Change requests and a friendlier first run",
+    items: [
+      "A branch’s schema changes can be reviewed as a change request and applied to main (fox request).",
+      "The first run seeds sample data, opens the console, and fox check diagnoses an install.",
+      "The Blackbox shows changes live, and fox backup verify proves a restore works.",
+      "An agent’s UPDATE or DELETE with no WHERE is refused. pgvector is bundled.",
+    ],
+  },
+  {
+    version: "v0.4",
+    date: "2026-09-23",
+    title: "Maintenance",
+    items: ["Documentation and CI."],
+  },
+  {
+    version: "v0.3",
+    date: "2026-09-23",
+    title: "Safe by default",
+    items: [
+      "Loopback listeners, a setup token and TLS that fails closed.",
+      "Branches belong to their maker, and every database role has its own password.",
+      "The Blackbox guards and records TRUNCATE and agents’ data changes; anchors are signed; a security log is added.",
+      "A remote S3 backup target with Object Lock, and scheduled backups.",
+      "Signed releases, build attestations and an SBOM.",
+    ],
+  },
+  {
+    version: "v0.2",
+    date: "2026-09-21",
+    title: "PostgreSQL 18",
+    items: ["Fresh installs run PostgreSQL 18; installs made on 16 keep 16.", "fox backup export and restore, and fox pg upgrade to move between majors.", "A more resilient setup that finishes an interrupted install."],
+  },
+  {
+    version: "v0.1",
+    date: "2026-09-21",
+    title: "The first FoxByte release",
+    items: [
+      "Instant copy-on-write branches with suspend and resume, behind one gateway on :6432.",
+      "The Blackbox: a hash-chained record of schema changes, with checkpoints, anchors and branch-before.",
+      "A policy gate, backups to object storage, point-in-time restore and a hot standby.",
+      "Imports from Postgres, MySQL, MongoDB and files, the Agent Branch API, the MCP server and the web console.",
+    ],
+  },
+];

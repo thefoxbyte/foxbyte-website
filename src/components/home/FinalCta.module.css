@@ -1,0 +1,99 @@
+.final {
+  position: relative;
+  background: var(--band);
+  color: #ffffff;
+  overflow: hidden;
+  text-align: center;
+}
+
+.wing {
+  position: absolute;
+  top: 18%;
+  width: min(30vw, 340px);
+  opacity: 0.14;
+  pointer-events: none;
+}
+
+.wing img {
+  width: 100%;
+  height: auto;
+}
+
+.drift {
+  position: absolute;
+  width: 46px;
+  height: 46px;
+  animation: drift 7s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes drift {
+  from {
+    transform: translateY(0) rotate(-4deg);
+  }
+  to {
+    transform: translateY(-34px) rotate(5deg);
+  }
+}
+
+.tile {
+  width: 100%;
+  height: 100%;
+  border-radius: 30%;
+  display: grid;
+  place-items: center;
+  background: rgba(31, 38, 51, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 12px 30px -12px rgba(0, 0, 0, 0.6);
+}
+
+.tile svg {
+  stroke: #ffffff;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.tile svg [data-accent] {
+  stroke: var(--coral);
+}
+
+.inner {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 26px;
+  justify-items: center;
+  padding-block: clamp(100px, 14vw, 170px);
+}
+
+.inner h2 {
+  font-size: clamp(38px, 6vw, 76px);
+  font-weight: 800;
+  max-width: 16ch;
+}
+
+.eyebrow {
+  color: var(--coral);
+}
+
+.accent {
+  color: var(--coral);
+}
+
+.lede {
+  color: #aeb6c3;
+}
+
+.ctas {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+@media (max-width: 680px) {
+  .drift {
+    display: none;
+  }
+}

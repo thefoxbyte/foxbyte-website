@@ -1,0 +1,86 @@
+.wrap {
+  border-radius: 22px;
+  padding: 12px;
+  overflow-x: auto;
+}
+
+.svg {
+  display: block;
+  width: 100%;
+  min-width: 620px;
+  height: auto;
+}
+
+.svg text {
+  font-family: var(--font-mono), ui-monospace, monospace;
+}
+
+.lane {
+  font-size: 12px;
+  fill: var(--coral);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.laneSub {
+  font-size: 11px;
+  fill: #8792a3;
+}
+
+.box {
+  fill: rgba(255, 255, 255, 0.04);
+  stroke: rgba(255, 255, 255, 0.16);
+  stroke-width: 1.2;
+}
+
+.accent {
+  stroke: var(--coral);
+}
+
+.core {
+  fill: rgba(238, 108, 77, 0.12);
+  stroke: var(--coral);
+}
+
+.title {
+  font-size: 13px;
+  fill: #ffffff;
+  font-weight: 500;
+}
+
+.sub {
+  font-size: 11px;
+  fill: #aeb6c3;
+}
+
+.wire {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.22);
+  stroke-width: 1.6;
+}
+
+.dashed {
+  stroke-dasharray: 4 5;
+}
+
+.flow {
+  fill: none;
+  stroke: var(--coral);
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-dasharray: 10 300;
+  animation: flow 2.2s linear infinite;
+}
+
+.slow {
+  animation-duration: 3.4s;
+}
+
+@keyframes flow {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: -310;
+  }
+}

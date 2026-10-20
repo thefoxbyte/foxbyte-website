@@ -1,0 +1,289 @@
+.bento {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.card {
+  position: relative;
+  border-radius: 22px;
+  background: var(--card);
+  border: 1px solid var(--card-line);
+  padding: 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow: hidden;
+  min-height: 290px;
+  isolation: isolate;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(420px circle at var(--mx, -200px) var(--my, -200px), rgba(238, 108, 77, 0.12), transparent 55%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+.wide {
+  grid-column: span 2;
+}
+
+.card h3 {
+  font-size: 21px;
+  font-weight: 700;
+}
+
+.card p {
+  color: var(--muted);
+  font-size: 15px;
+  max-width: 50ch;
+}
+
+.art {
+  margin-top: auto;
+  position: relative;
+  min-height: 110px;
+  display: flex;
+  align-items: flex-end;
+  font-family: var(--font-mono), ui-monospace, monospace;
+}
+
+.stack {
+  display: grid;
+  gap: 8px;
+  width: 100%;
+}
+
+.row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.chip {
+  font-size: 12px;
+  padding: 7px 11px;
+  border-radius: 9px;
+  background: var(--chip);
+  border: 1px solid var(--chip-line);
+  color: var(--chip-fg);
+  white-space: nowrap;
+}
+
+.wrapChip {
+  white-space: normal;
+}
+
+.sel {
+  border-color: var(--coral);
+  background: rgba(238, 108, 77, 0.12);
+}
+
+.plus {
+  color: var(--ok);
+}
+
+.pr {
+  color: var(--accent-ink);
+}
+
+.note {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.undoLine {
+  min-height: 22px;
+  font-size: 13px;
+}
+
+.scrub {
+  width: 100%;
+  display: grid;
+  gap: 12px;
+}
+
+.scrubTime {
+  font-size: 13px;
+  color: var(--muted);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.scrubTime b {
+  color: var(--fg);
+  font-weight: 500;
+}
+
+.track {
+  position: relative;
+  height: 56px;
+  touch-action: none;
+}
+
+.ticks {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.ticks i {
+  width: 2px;
+  border-radius: 1px;
+  background: var(--chip-line);
+}
+
+.ticks .big {
+  background: var(--fg);
+  height: 34px !important;
+}
+
+.past {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  background: var(--coral);
+  border-radius: 2px;
+}
+
+.handle {
+  position: absolute;
+  top: 0;
+  left: -11px;
+  width: 22px;
+  height: 56px;
+  cursor: grab;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.handle:active {
+  cursor: grabbing;
+}
+
+.handle i {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--coral);
+  box-shadow: 0 0 0 6px rgba(238, 108, 77, 0.2);
+  flex: none;
+}
+
+.handle s {
+  width: 2px;
+  flex: 1;
+  background: var(--coral);
+}
+
+.sleep {
+  position: relative;
+  width: 100%;
+}
+
+.brpill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  padding: 10px 16px;
+  border-radius: 12px;
+  background: var(--chip);
+  border: 1px solid var(--chip-line);
+}
+
+.led {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+}
+
+.zz {
+  position: absolute;
+  font-family: var(--font-display), ui-sans-serif, sans-serif;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.wake {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 13px;
+  color: var(--accent-ink);
+}
+
+.nodes {
+  display: flex;
+  gap: 14px;
+  width: 100%;
+  align-items: center;
+}
+
+.node {
+  flex: 1;
+  border-radius: 12px;
+  padding: 12px;
+  border: 1px solid var(--chip-line);
+  font-size: 12px;
+  display: grid;
+  gap: 6px;
+  background: var(--chip);
+}
+
+.node b {
+  font-family: var(--font-display), ui-sans-serif, sans-serif;
+  font-size: 15px;
+}
+
+.miniRow {
+  display: grid;
+  grid-template-columns: 44px 1fr 1fr;
+  gap: 8px;
+  font-size: 11.5px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: var(--chip);
+  border: 1px solid var(--chip-line);
+}
+
+.miniHead {
+  background: none;
+  border-color: transparent;
+  color: var(--muted);
+  padding-block: 0;
+}
+
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 1020px) {
+  .bento {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 680px) {
+  .bento {
+    grid-template-columns: 1fr;
+  }
+
+  .wide {
+    grid-column: auto;
+  }
+}

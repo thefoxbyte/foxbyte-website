@@ -1,0 +1,51 @@
+.install {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 13.5px;
+  color: var(--chip-fg);
+  background: var(--chip);
+  border: 1px solid var(--chip-line);
+  border-radius: 12px;
+  padding: 8px 8px 8px 16px;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.onBand {
+  background: rgba(0, 0, 0, 0.22);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: #dfe3ea;
+}
+
+.code {
+  min-width: 0;
+  overflow-x: auto;
+  white-space: nowrap;
+  scrollbar-width: none;
+  font-family: inherit;
+}
+
+.code::-webkit-scrollbar {
+  display: none;
+}
+
+.prompt {
+  color: var(--coral);
+}
+
+.copy {
+  flex: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  background: var(--pill-hover);
+  color: inherit;
+}
+
+.onBand .copy {
+  background: rgba(255, 255, 255, 0.08);
+}

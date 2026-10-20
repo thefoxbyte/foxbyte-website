@@ -1,0 +1,154 @@
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.card {
+  border-radius: 26px;
+  background: var(--card);
+  border: 1px solid var(--card-line);
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+
+.card h3 {
+  font-size: clamp(24px, 2.4vw, 30px);
+}
+
+.card p {
+  color: var(--muted);
+  max-width: 52ch;
+}
+
+.viz {
+  border-radius: 18px;
+  padding: 20px;
+  min-height: 230px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  overflow: hidden;
+  font-family: var(--font-mono), ui-monospace, monospace;
+}
+
+.mig {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  flex: 1;
+}
+
+.srcs {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: none;
+}
+
+.src {
+  font-size: 12px;
+  padding: 5px 10px;
+  border-radius: 7px;
+  background: rgba(255, 255, 255, 0.07);
+  color: #dfe3ea;
+}
+
+.flight {
+  flex: 1;
+  position: relative;
+  height: 150px;
+}
+
+.dot {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--coral);
+  box-shadow: 0 0 14px var(--coral);
+}
+
+.dest {
+  flex: none;
+  border-radius: 12px;
+  padding: 12px 14px;
+  border: 1px solid var(--coral);
+  font-size: 12px;
+  display: grid;
+  gap: 4px;
+  color: #aeb6c3;
+}
+
+.dest b {
+  font-family: var(--font-display), ui-sans-serif, sans-serif;
+  font-size: 15px;
+  color: #ffffff;
+}
+
+.okText {
+  color: #4fd1a1;
+}
+
+.flow {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.flow span {
+  font-size: 11.5px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #cfd5de;
+}
+
+.flow .on {
+  border-color: var(--coral);
+  color: #ffffff;
+  background: rgba(238, 108, 77, 0.18);
+}
+
+.dag {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.dag text {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 11.5px;
+}
+
+.snip {
+  margin: 0;
+  border-radius: 14px;
+  padding: 14px 16px;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 12.5px;
+  line-height: 1.7;
+  background: var(--chip);
+  border: 1px solid var(--chip-line);
+  color: var(--chip-fg);
+  overflow-x: auto;
+}
+
+.pr {
+  color: var(--accent-ink);
+}
+
+@media (max-width: 1020px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 680px) {
+  .card {
+    padding: 22px;
+  }
+}

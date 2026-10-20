@@ -1,0 +1,122 @@
+.story {
+  position: relative;
+  background: var(--bg-2);
+}
+
+.headWrap {
+  padding-top: clamp(80px, 9vw, 120px);
+}
+
+.headWrap :global(.head) {
+  margin-bottom: 0;
+}
+
+.sticky {
+  position: sticky;
+  top: var(--nav-h);
+  height: calc(100vh - var(--nav-h));
+  display: flex;
+  align-items: center;
+  padding-block: 16px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 56px;
+  align-items: center;
+  width: 100%;
+}
+
+.steps {
+  display: grid;
+  gap: 6px;
+}
+
+.step {
+  display: grid;
+  gap: 8px;
+  padding: 18px 22px;
+  border-radius: 18px;
+  transition: background 0.4s, box-shadow 0.4s;
+  text-align: left;
+  width: 100%;
+}
+
+.step.on {
+  background: var(--card);
+  box-shadow: 0 20px 50px -26px var(--shadow);
+}
+
+.label {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 12px;
+  color: var(--accent-ink);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+}
+
+.step h3 {
+  font-size: 22px;
+}
+
+.step p {
+  color: var(--muted);
+  font-size: 15.5px;
+  max-width: 48ch;
+}
+
+.bar {
+  height: 3px;
+  border-radius: 2px;
+  background: var(--line);
+  overflow: hidden;
+}
+
+.bar div {
+  height: 100%;
+  background: var(--coral);
+  transform-origin: left;
+}
+
+.viz {
+  position: relative;
+  aspect-ratio: 1.15;
+  max-width: 100%;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 50px 100px -40px var(--shadow);
+}
+
+.vizLayer {
+  position: absolute;
+  inset: 0;
+}
+
+.stack {
+  display: grid;
+  gap: 56px;
+}
+
+.stackItem {
+  display: grid;
+  gap: 20px;
+}
+
+@media (max-height: 820px) and (min-width: 1021px) {
+  .step {
+    padding: 14px 20px;
+  }
+
+  .viz {
+    aspect-ratio: auto;
+    height: calc(100vh - 220px);
+  }
+}
+
+@media (max-width: 680px) {
+  .viz {
+    aspect-ratio: auto;
+    min-height: 440px;
+  }
+}

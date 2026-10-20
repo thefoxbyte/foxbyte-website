@@ -1,0 +1,55 @@
+.code {
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 40px 100px -40px var(--shadow);
+}
+
+.tabs {
+  display: flex;
+  gap: 4px;
+  padding: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.tab {
+  padding: 8px 14px;
+  font-size: 14px;
+  color: #aeb6c3;
+  border-radius: 9px;
+  transition: background-color 0.25s, color 0.25s;
+}
+
+.tab:hover {
+  color: #ffffff;
+}
+
+.tabOn {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.code pre {
+  margin: 0;
+  padding: 22px 24px;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 13.5px;
+  line-height: 1.75;
+  color: #dfe3ea;
+  overflow-x: auto;
+  min-height: 250px;
+}
+
+.st {
+  color: #ffb3a1;
+  font-weight: 400;
+}
+
+.cm {
+  color: #7f8aa0;
+  font-style: normal;
+}
+
+.pr {
+  color: var(--coral);
+  font-weight: 400;
+}

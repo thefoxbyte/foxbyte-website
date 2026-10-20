@@ -1,0 +1,75 @@
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: var(--intro-bg);
+  display: none;
+  place-items: center;
+  cursor: pointer;
+}
+
+:global(:root[data-intro]) .intro {
+  display: grid;
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+}
+
+.mark {
+  position: relative;
+  width: 120px;
+  height: 99px;
+}
+
+.set {
+  position: absolute;
+  inset: 0;
+  display: flex;
+}
+
+.set:global(.dark-only) {
+  display: none;
+}
+
+:global(:root[data-theme="dark"]) .set:global(.dark-only) {
+  display: flex;
+}
+
+.wing {
+  width: 50%;
+  height: 100%;
+  display: flex;
+}
+
+.wing img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.word {
+  display: inline-flex;
+}
+
+.word img {
+  height: 62px;
+  width: auto;
+}
+
+@media (max-width: 680px) {
+  .inner {
+    gap: 16px;
+  }
+
+  .mark {
+    width: 84px;
+    height: 70px;
+  }
+
+  .word img {
+    height: 40px;
+  }
+}

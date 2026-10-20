@@ -1,0 +1,44 @@
+.mark {
+  display: inline-flex;
+  flex: none;
+  position: relative;
+}
+
+.set {
+  position: absolute;
+  inset: 0;
+  display: flex;
+}
+
+.set:global(.dark-only) {
+  display: none;
+}
+
+:global(:root[data-theme="dark"]) .set:global(.dark-only) {
+  display: flex;
+}
+
+.mark > img,
+.set > img {
+  width: 50%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 0.35s var(--ease);
+}
+
+.wingL {
+  transform-origin: 100% 100%;
+}
+
+.wingR {
+  transform-origin: 0% 100%;
+}
+
+.word {
+  width: auto;
+}
+
+.wordWrap {
+  display: inline-flex;
+  align-items: center;
+}
