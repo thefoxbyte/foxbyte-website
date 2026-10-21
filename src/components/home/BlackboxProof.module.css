@@ -1,0 +1,64 @@
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  gap: 56px;
+  align-items: center;
+}
+
+.copy {
+  display: grid;
+  gap: 20px;
+  min-width: 0;
+}
+
+.points {
+  list-style: none;
+  margin: 4px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 14px;
+}
+
+.points li {
+  display: grid;
+  grid-template-columns: 22px minmax(0, 1fr);
+  gap: 12px;
+  font-size: 16.5px;
+  color: var(--muted);
+}
+
+.points b {
+  color: var(--fg);
+  font-weight: 600;
+}
+
+.points svg {
+  margin-top: 3px;
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 24px;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.links a {
+  color: var(--accent-ink);
+}
+
+.links a:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.visual {
+  min-width: 0;
+}
+
+@media (max-width: 1020px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

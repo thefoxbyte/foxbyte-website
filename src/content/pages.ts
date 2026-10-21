@@ -14,7 +14,7 @@ export const aiAgentsPage: PageContent = {
   },
   hero: {
     eyebrow: "AI agents",
-    title: "Let AI take control. Without touching main.",
+    title: "Let AI take the wheel. Main stays in your hands.",
     lede: "Each agent gets an isolated copy of your database in seconds, runs real SQL against real data, and leaves behind a record of everything it changed. When you like what it built, you approve it.",
     ctas: [install, { label: "MCP setup guide", href: `${repo}/blob/main/docs/mcp.md` }],
     visual: "agentCode",

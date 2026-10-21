@@ -12,8 +12,9 @@ import { HeroDemo } from "./HeroDemo";
 import { HeroTiles } from "./HeroTiles";
 import styles from "./Hero.module.css";
 
-const lead = ["Let", "AI", "take", "the", "wheel.", "Main", "stays"];
-const highlight = ["in", "your", "hands."];
+const lead = ["Every", "schema", "change,"];
+const highlight = ["on", "the", "record."];
+const breakAfter = lead.length - 1;
 
 export function Hero() {
   const mx = useMotionValue(-1000);
@@ -52,13 +53,13 @@ export function Hero() {
         <HeroTiles nx={snx} ny={sny} sy={scrollY} />
         <div className={styles.copy}>
           <span className={`${styles.pill} ${styles.rise}`} style={{ "--d": "0s" } as CSSProperties}>
-            <b>On-prem</b>PostgreSQL 18 · open source core
+            <b>On-prem</b>PostgreSQL 18 · nothing phones home
           </span>
           <h1 className={styles.h1}>
             {lead.map((w, i) => (
               <span key={`${w}-${i}`}>
                 {word(w, i)}
-                {i === 4 ? <br /> : " "}
+                {i === breakAfter ? <br /> : " "}
               </span>
             ))}
             <span className={styles.hl}>
@@ -74,7 +75,7 @@ export function Hero() {
             </span>
           </h1>
           <p className={`${styles.sub} ${styles.rise}`} style={{ "--d": ".45s" } as CSSProperties}>
-            FoxByte is PostgreSQL on your own servers, with a Blackbox that records every schema change, a live feed of every row and one-command migrations. People and AI work on instant copies. Main stays exactly as you left it.
+            FoxByte is PostgreSQL on servers you control. Its Blackbox records who changed what, and from which tool, in a hash chain nobody can quietly rewrite. People and AI work on instant copies, so main stays exactly as you left it.
           </p>
           <div className={`${styles.ctas} ${styles.rise}`} style={{ "--d": ".6s" } as CSSProperties}>
             <Magnetic className="btn primary" to="start">

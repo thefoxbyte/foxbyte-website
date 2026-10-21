@@ -1,8 +1,8 @@
 export const heroScript = [
-  { cmd: "fox import --from mysql://…/shop --as shop", out: "✓ 48 tables imported · new branch \"shop\"", tone: "ok" },
-  { cmd: "fox branch create ai-sandbox", out: "✓ ready · copy-on-write · main untouched", tone: "ok" },
-  { cmd: "psql …/ai-sandbox -c \"DROP TABLE invoices\"", out: "✗ blocked by policy · BBX01", tone: "bad" },
-  { cmd: "fox blackbox ai-sandbox", out: "1 change recorded · agent-claude · blocked", tone: "dim" },
+  { cmd: "fox branch create ai-sandbox", out: "✓ full copy of main · ready · main untouched", tone: "ok" },
+  { cmd: "psql …/ai-sandbox -c \"ALTER TABLE users ADD plan text\"", out: "ALTER TABLE · recorded in the Blackbox", tone: "ok" },
+  { cmd: "psql …/ai-sandbox -c \"DROP TABLE invoices\"", out: "✗ blocked by policy · BBX01 · recorded", tone: "bad" },
+  { cmd: "fox blackbox verify ai-sandbox", out: "✓ chain intact · 2 entries on record", tone: "ok" },
 ] as const;
 
 export const marqueeItems = [
@@ -20,16 +20,6 @@ export const marqueeItems = [
   { label: "Django", strong: false },
   { label: "Rails", strong: false },
   { label: "GORM", strong: false },
-] as const;
-
-export const statement =
-  "You own the data and you answer for it. FoxByte gives you *a *record *of *every *schema *change, *a *live *feed *of *every *row and *a *way *back *from *any *mistake.";
-
-export const statementChips = [
-  { text: "Every schema change on record", tag: "Blackbox" },
-  { text: "Every row, live", tag: "Realtime" },
-  { text: "From MySQL in one command", tag: "Migrations" },
-  { text: "AI on a copy", tag: "Branches" },
 ] as const;
 
 export const suitPieces = [
@@ -83,20 +73,6 @@ export const agentCode = {
   Python:
     'from foxbyte import FoxByte\n\ndb = FoxByte(api_key="key_…")\ndb.create_branch("ai-sandbox")\nprint(db.query("ai-sandbox", "select count(*) from users"))\nprint(db.verify_blackbox("ai-sandbox"))',
 } as const;
-
-export const agentPoints = [
-  "Each agent gets a full copy of your database and a key that opens that copy only.",
-  "Everything it does is recorded in the Blackbox and labelled as an agent.",
-  "Guardrails refuse destructive commands and runaway deletes before they run.",
-  "When you like what it built, approve the change request. Only a person can say yes.",
-] as const;
-
-export const stats = [
-  { value: 14.5, decimals: 1, unit: "ms", label: "to stop a runaway delete on a million-row table" },
-  { value: 8, decimals: 0, unit: "", label: "ways to move in: Postgres, MySQL, MariaDB, MongoDB, SQL, CSV, JSON, NDJSON" },
-  { value: 18, decimals: 0, unit: "", label: "PostgreSQL 18, stock and unmodified" },
-  { value: 0, decimals: 0, unit: "", label: "changes to your drivers, ORM or SQL" },
-] as const;
 
 export const shots = [
   { label: "Dashboard", file: "dashboard" },
@@ -155,7 +131,7 @@ export type BotMood = "idle" | "armour" | "replica" | "stream" | "alert" | "poin
 
 export const botPackets: Record<string, { packets: readonly string[]; mood?: BotMood; bad?: boolean }> = {
   top: { packets: ["● connected · localhost:6432"] },
-  why: { packets: ["SELECT 1  ✓ 1 row"] },
+  proof: { packets: ["blackbox verify · chain ✓"] },
   suit: { packets: ["suit · 8/8 modules online"], mood: "armour" },
   s0: { packets: ["branch qa · ready", "replica of main ✓"], mood: "replica" },
   s1: { packets: ["blackbox +1 · chain ✓"] },
@@ -188,4 +164,4 @@ export const botPackets: Record<string, { packets: readonly string[]; mood?: Bot
   "/legal": { packets: ["AGPL-3.0 · Apache-2.0"] },
 };
 
-export const tourStops = ["why", "suit", "story", "data", "agents", "features", "pricing", "start"] as const;
+export const tourStops = ["proof", "suit", "story", "data", "pricing", "start"] as const;

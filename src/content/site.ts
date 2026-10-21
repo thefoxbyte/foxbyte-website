@@ -1,11 +1,11 @@
 export const site = {
   name: "FoxByte",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
-  title: "FoxByte: PostgreSQL with a Blackbox, live rows and AI that never touches main",
+  title: "FoxByte: every schema change on record, on PostgreSQL you run yourself",
   shortTitle: "FoxByte",
   description:
     "FoxByte is PostgreSQL on your own servers, with a Blackbox that records every schema change, a realtime feed of every row, one-command migrations and instant copies where people and AI work without touching main.",
-  tagline: "Let AI take the wheel. Main stays in your hands.",
+  tagline: "Every schema change, on the record.",
   github: "https://github.com/thefoxbyte/foxbyte",
   contact: "/contact",
   install: "curl -fsSL https://get.thefoxbyte.com/install.sh | sh",

@@ -105,7 +105,7 @@ export function HeroDemo() {
         )}
       </m.div>
       <p className="sr-only">
-        A terminal imports a MySQL database into a new branch, creates a copy for an AI agent, blocks the agent from dropping a table, and the Blackbox records it while main stays untouched.
+        A terminal creates a copy of main for an AI agent, records an ALTER TABLE in the Blackbox, blocks a DROP TABLE by policy, and verifies the Blackbox hash chain, while main stays untouched.
       </p>
       <svg className={styles.tree} viewBox="0 0 460 160" aria-hidden="true">
         <path d="M20 92H440" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" opacity=".9" />
@@ -116,17 +116,17 @@ export function HeroDemo() {
         <text x="380" y="84">
           untouched
         </text>
-        <m.path d="M60 92C92 92 96 134 130 134H270" stroke="#9aa5b5" strokeWidth="2.2" fill="none" strokeLinecap="round" initial={draw(false)} animate={draw(stage >= 1)} transition={{ duration: stage >= 1 ? 1 : 0.25 }} />
+        <m.path d="M150 92C188 92 192 40 234 40H430" stroke="#ee6c4d" strokeWidth="2.5" fill="none" strokeLinecap="round" initial={draw(false)} animate={draw(stage >= 1)} transition={{ duration: stage >= 1 ? 1.1 : 0.25 }} />
         {stage >= 1 && (
-          <m.text x="140" y="126" className={styles.tw} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-            shop · from MySQL
-          </m.text>
-        )}
-        <m.path d="M150 92C188 92 192 40 234 40H430" stroke="#ee6c4d" strokeWidth="2.5" fill="none" strokeLinecap="round" initial={draw(false)} animate={draw(stage >= 2)} transition={{ duration: stage >= 2 ? 1.1 : 0.25 }} />
-        {stage >= 2 && (
           <m.text x="242" y="28" className={styles.tw} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
             ai-sandbox
           </m.text>
+        )}
+        {stage >= 2 && (
+          <m.g initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }} style={{ originX: "262px", originY: "40px" }}>
+            <circle cx="262" cy="40" r="7" fill="#4fd1a1" />
+            <text x="224" y="66">ALTER · on record</text>
+          </m.g>
         )}
         {stage >= 3 && (
           <m.g initial={{ opacity: 0, scale: 1.8 }} animate={{ opacity: 1, scale: 1 }} style={{ originX: "330px", originY: "40px" }}>
@@ -141,7 +141,7 @@ export function HeroDemo() {
           <m.g initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}>
             <rect x="296" y="114" width="146" height="30" rx="8" fill="rgba(238,108,77,.14)" stroke="#ee6c4d" strokeOpacity=".6" />
             <text x="308" y="133" className={styles.tw}>
-              Blackbox · on record
+              Blackbox · chain ✓
             </text>
           </m.g>
         )}

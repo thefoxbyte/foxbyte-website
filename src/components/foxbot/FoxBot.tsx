@@ -12,7 +12,7 @@ import styles from "./FoxBot.module.css";
 
 type Packet = { id: number; text: string; bad?: boolean };
 
-const sectionIds = ["top", "why", "suit", "story", "data", "agents", "features", "pricing", "faq", "start"];
+const sectionIds = ["top", "proof", "suit", "story", "data", "pricing", "faq", "start"];
 const ease = [0.22, 1, 0.36, 1] as const;
 
 function currentSection(): string {

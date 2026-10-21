@@ -1,14 +1,10 @@
 import { faqs } from "@/content/home";
 import { site } from "@/content/site";
 import { Hero } from "@/components/home/Hero";
-import { Statement } from "@/components/home/Statement";
+import { BlackboxProof } from "@/components/home/BlackboxProof";
 import { Suit } from "@/components/home/Suit";
 import { Story } from "@/components/home/Story";
 import { Data } from "@/components/home/Data";
-import { Agents } from "@/components/home/Agents";
-import { Features } from "@/components/home/Features";
-import { Stats } from "@/components/home/Stats";
-import { Showcase } from "@/components/home/Showcase";
 import { Editions } from "@/components/home/Editions";
 import { Faq } from "@/components/home/Faq";
 import { FinalCta } from "@/components/home/FinalCta";
@@ -59,14 +55,10 @@ export default function HomePage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, "\\u003c") }} />
       <Hero />
-      <Statement />
+      <BlackboxProof />
       <Suit />
       <Story />
       <Data />
-      <Agents />
-      <Features />
-      <Stats />
-      <Showcase />
       <Editions />
       <Faq />
       <FinalCta />
