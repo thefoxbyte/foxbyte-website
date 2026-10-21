@@ -53,7 +53,7 @@ export function Hero() {
         <HeroTiles nx={snx} ny={sny} sy={scrollY} />
         <div className={styles.copy}>
           <span className={`${styles.pill} ${styles.rise}`} style={{ "--d": "0s" } as CSSProperties}>
-            <b>On-prem</b>PostgreSQL 18 · nothing phones home
+            <b>On-prem</b>PostgreSQL 18 · no telemetry
           </span>
           <h1 className={styles.h1}>
             {lead.map((w, i) => (

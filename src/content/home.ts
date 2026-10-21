@@ -154,6 +154,7 @@ export const botPackets: Record<string, { packets: readonly string[]; mood?: Bot
   "/use-cases": { packets: ["branch pr-1482 · ready"], mood: "replica" },
   "/pricing": { packets: ["edition · standard ✓"] },
   "/security": { packets: ["TLS ✓ · loopback only"] },
+  "/privacy": { packets: ["telemetry · none", "data · stays here"] },
   "/why-foxbyte": { packets: ["SELECT version() → 18"] },
   "/download": { packets: ["$ fox setup"], mood: "point" },
   "/docs": { packets: ["GET /docs → 200"] },

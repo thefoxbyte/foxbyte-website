@@ -71,8 +71,9 @@ export const footerColumns = [
     links: [
       { label: "About", href: "/company" },
       { label: "Contact", href: "/contact" },
+      { label: "Data privacy", href: "/privacy" },
       { label: "Licences", href: "/legal/licence" },
-      { label: "Privacy", href: "/legal/privacy" },
+      { label: "Website privacy", href: "/legal/privacy" },
     ],
   },
 ] as const;

@@ -280,8 +280,8 @@ export const securityPage: PageContent = {
   ],
   related: [
     { label: "Blackbox", href: "/product/blackbox" },
-    { label: "Download", href: "/download" },
-    { label: "Privacy", href: "/legal/privacy" },
+    { label: "Data privacy", href: "/privacy" },
+    { label: "Website privacy", href: "/legal/privacy" },
   ],
 };
 
@@ -427,7 +427,7 @@ export const companyPage: PageContent = {
       items: [
         { title: "Speed is never traded", body: "Nothing new is allowed onto the commit path. Branching, backups and time travel run beside it." },
         { title: "Candour over claims", body: "We publish what FoxByte is not, and the benchmarks behind every limit we ship." },
-        { title: "Your machines, your data", body: "FoxByte runs where you run it. Nothing phones home." },
+        { title: "Your machines, your data", body: "FoxByte runs where you run it, with no telemetry. Your data never leaves your machines unless you send it somewhere." },
         { title: "Names that never move", body: "What is written into your data never carries the product’s name, so a rename never touches an install." },
       ],
     },
@@ -437,4 +437,121 @@ export const companyPage: PageContent = {
     { label: "Blog", href: "/blog" },
     { label: "Contact", href: "/contact" },
   ],
+};
+
+export const dataPrivacyPage: PageContent = {
+  slug: "privacy",
+  path: "/privacy",
+  crumb: "Data privacy",
+  meta: {
+    title: "Data privacy and security",
+    description: "Where your data lives with FoxByte, every connection it makes to the outside, how passwords, keys and traffic are protected, who can see what, and how to remove data.",
+  },
+  hero: {
+    eyebrow: "Data privacy",
+    title: "Your data stays on machines you control",
+    lede: "FoxByte runs on your own laptop or servers. It has no telemetry, we never see your data, and nothing leaves the machine unless you send it somewhere. Here is exactly how that works, including the few connections it does make.",
+    ctas: [{ label: "Security defaults", href: "/security", primary: true }, { label: "Website privacy", href: "/legal/privacy" }],
+    visual: "secure",
+  },
+  blocks: [
+    {
+      kind: "grid",
+      eyebrow: "Where your data lives",
+      title: "On your machines, and nowhere else by default",
+      columns: 4,
+      items: [
+        { title: "Your databases", body: "Every branch, row and index lives on the machine that runs FoxByte. There is no FoxByte cloud in the path.", icon: "db" },
+        { title: "No telemetry", body: "FoxByte sends no usage data, metrics or crash reports to anyone, including us.", icon: "shield" },
+        { title: "Backups", body: "Kept beside the database until you choose a bucket of your own. Then they go there and only there.", icon: "rewind" },
+        { title: "Realtime", body: "The change feed streams from your own server to your own apps, with no third party in the middle.", icon: "pulse" },
+      ],
+    },
+    {
+      kind: "list",
+      eyebrow: "Full disclosure",
+      title: "Every connection FoxByte makes to the outside",
+      lede: "None of these carries your data. Once installed, FoxByte runs without an internet connection: the update check gives up quietly and the console falls back to system fonts.",
+      items: [
+        "An update check. fox start asks GitHub whether a newer release exists, and fox check reports your version. It sends nothing about your data. FOX_NO_UPDATE_CHECK=1 turns it off.",
+        "Downloads you ask for. Installing, fox update and fox upgrade fetch signed releases from GitHub and engine images from GitHub’s container registry.",
+        "Web fonts. The console loads its fonts from Google Fonts, so your browser contacts Google when you open it.",
+        "Sign-in with GitHub or Google, only if you configure it. Otherwise accounts are email and password, checked on your machine.",
+        "Backups and anchor copies, only to a bucket you set with fox backup target set or fox blackbox anchor-target set.",
+        "Imports, only from the source you name. Importing from private networks is for admins, and cloud metadata addresses are refused.",
+      ],
+    },
+    {
+      kind: "grid",
+      eyebrow: "Protecting information",
+      title: "How secrets and traffic are kept safe",
+      items: [
+        { title: "Encrypted in transit", body: "The console, the gateway and the Agent API all serve TLS, and a service that cannot load its certificate refuses to start rather than fall back to plain text off loopback.", icon: "shield" },
+        { title: "Passwords never stored", body: "Account passwords are kept only as bcrypt hashes. Nobody can read one back, not even an admin; a forgotten password is reset from the machine itself.", icon: "box" },
+        { title: "Keys shown once", body: "API keys are stored as SHA-256 hashes with a short prefix for display. Revoke one and everything using it is cut off at once.", icon: "branch" },
+        { title: "Sessions hashed at rest", body: "Sign-in session tokens are stored hashed, so a copy of the accounts file does not hand out live sessions.", icon: "rewind" },
+        { title: "A password per role", body: "Every account and agent logs in to Postgres as its own role with its own password. The install secret belongs to the superuser alone and never appears on a command line.", icon: "db" },
+        { title: "Secrets in locked files", body: "Private keys and the backup bucket’s secret are written to files only their owner can read, and the backup secret is asked for rather than typed on a command line.", icon: "import" },
+      ],
+    },
+    {
+      kind: "grid",
+      eyebrow: "Access",
+      title: "Who can see what",
+      columns: 2,
+      items: [
+        { title: "Branches belong to their maker", body: "Everyone shares main. A branch made through the console, the API or an agent is its maker’s; other people’s branches are not listed and answer “not found”, through the gateway too." },
+        { title: "Agents see one branch", body: "An agent key opens its own branch and nothing else. It never holds an admin grant, and the console and control-plane API refuse it." },
+        { title: "Postgres rules still apply", body: "Row-level security policies and GRANTs work exactly as they do in Postgres, for every client that connects." },
+        { title: "Admin power is on the record", body: "Admin grants, sign-ins, failed sign-ins, key changes and refused requests all go into the security log, chained and verifiable." },
+      ],
+    },
+    {
+      kind: "split",
+      eyebrow: "What FoxByte records",
+      title: "Records about people, and how long they last",
+      body: [
+        "The Blackbox records every schema change with who made it, the tool and the full statement. The security log records who came in and what they were refused. Both are append-only on purpose, so plan for that: keep personal data out of schema statements.",
+        "Query history keeps the SQL each person ran, never the results, for 90 days by default. fox history retention changes how long, and each person sees only their own.",
+      ],
+      bullets: ["Blackbox: schema changes, who, which tool", "Security log: sign-ins, keys, grants, refusals", "Query history: SQL text only, 90 days by default"],
+      visual: "record",
+      reverse: true,
+    },
+    {
+      kind: "code",
+      eyebrow: "Removing data",
+      title: "Delete what you no longer need",
+      body: "Removing data is a command away, and nothing is kept elsewhere because nothing was sent elsewhere.",
+      lines: ["$ fox branch delete qa", "$ fox apikey revoke you@example.com <id>", "$ fox user delete former@example.com", "$ fox backup prune --keep 7", "$ fox uninstall"],
+      note: "Backups in an Object Lock bucket cannot be deleted before their retention ends, by design. Choose the retention with that in mind.",
+    },
+    {
+      kind: "list",
+      eyebrow: "Not yet",
+      title: "What FoxByte does not do for you yet",
+      items: [
+        "Encryption at rest. FoxByte does not add its own encryption to stored data yet. Use disk encryption on the machine (FileVault, BitLocker or LUKS) and server-side encryption on your backup bucket.",
+        "Self-hosted console fonts. Until the console bundles its own fonts, opening it makes a request to Google Fonts.",
+        "Compliance by itself. FoxByte gives you controls and evidence, but no product makes you compliant with a regulation on its own. Check your obligations with your counsel.",
+      ],
+    },
+    {
+      kind: "faq",
+      title: "Privacy questions",
+      items: [
+        { q: "Can FoxByte, the company, see my data?", a: "No. FoxByte runs on your machines, sends no telemetry and has no service in the path of your data. We could not see it if we wanted to." },
+        { q: "Does FoxByte work without the internet?", a: "Yes, once installed. Installing and updating need GitHub, but the database, branches, the Blackbox and the console all run offline. The update check gives up quietly and the console falls back to system fonts." },
+        { q: "Where are accounts and keys kept?", a: "In a small accounts database on the machine that runs FoxByte. Passwords are bcrypt hashes, keys and session tokens are SHA-256 hashes, and none of it leaves the machine." },
+        { q: "Does FoxByte make me compliant with GDPR or India’s DPDP Act?", a: "Not by itself. It helps: data stays where you put it, access is per person, and the Blackbox and security log give you evidence of who changed what. Whether that meets your obligations is a question for your counsel." },
+        { q: "What does this website collect?", a: "Almost nothing: no analytics, no tracking cookies and no third-party scripts. The website privacy page lists the few preferences it keeps in your browser." },
+      ],
+    },
+  ],
+  related: [
+    { label: "Security", href: "/security" },
+    { label: "Website privacy", href: "/legal/privacy" },
+    { label: "Blackbox", href: "/product/blackbox" },
+  ],
+  cta: { title: "Run it where your data already lives.", lede: "Install FoxByte on your own machine. Nothing about your data goes anywhere else.", docs: { label: "Security defaults", href: "/security" } },
 };

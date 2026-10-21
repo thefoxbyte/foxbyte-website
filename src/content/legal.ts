@@ -49,7 +49,7 @@ export const legalDocs: LegalDoc[] = [
     updated: "2026-10-20",
     sections: [
       {
-        paragraphs: ["This page covers the FoxByte website only. FoxByte the database runs on your own machines and does not send your data to us."],
+        paragraphs: ["This page covers the FoxByte website only. FoxByte the database runs on your own machines and does not send your data to us; how it protects your data is on the data privacy page at /privacy."],
       },
       {
         heading: "No tracking",
