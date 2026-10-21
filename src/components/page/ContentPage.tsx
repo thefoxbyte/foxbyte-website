@@ -10,7 +10,7 @@ export function ContentPage({ page, trail }: { page: PageContent; trail?: Crumb[
     <>
       <PageHero hero={page.hero} trail={trail ?? [{ label: page.crumb, href: page.path }]} />
       <Blocks blocks={page.blocks} />
-      <CtaBand title={page.cta?.title ?? "Spin up a branch in seconds."} lede={page.cta?.lede ?? "Install FoxByte with one command. Bring your database over with one more."} related={page.related} />
+      <CtaBand title={page.cta?.title ?? "Spin up a branch in seconds."} lede={page.cta?.lede ?? "Install FoxByte with one command. Bring your database over with one more."} related={page.related} docs={page.cta?.docs} />
     </>
   );
 }

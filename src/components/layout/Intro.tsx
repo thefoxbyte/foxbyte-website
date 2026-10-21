@@ -53,19 +53,30 @@ export function Intro() {
   }, []);
 
   useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") finish();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [finish]);
+
+  useEffect(() => {
     if (!document.documentElement.dataset.intro) {
       const id = window.requestAnimationFrame(() => setVisible(false));
       return () => window.cancelAnimationFrame(id);
     }
-    const t = window.setTimeout(finish, 1500);
+    const t = window.setTimeout(finish, 1200);
     return () => window.clearTimeout(t);
   }, [finish]);
 
   if (!visible) return null;
 
   return (
-    <div ref={overlay} className={styles.intro} onClick={finish} aria-hidden="true">
-      <div className={styles.inner}>
+    <div ref={overlay} className={styles.intro} onClick={finish}>
+      <button type="button" className={styles.skip} onClick={finish}>
+        Skip intro
+      </button>
+      <div className={styles.inner} aria-hidden="true">
         <div ref={mark} className={styles.mark}>
           <span className={`${styles.set} light-only`}>
             <Wing variant="light" side="l" />

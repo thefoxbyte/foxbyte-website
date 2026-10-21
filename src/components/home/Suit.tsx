@@ -124,8 +124,8 @@ export function Suit() {
                 <m.div
                   key={piece.title}
                   className={styles.piece}
-                  initial={{ opacity: 0, x: i % 2 ? 80 : -80, rotate: i % 2 ? 20 : -20 }}
-                  whileInView={{ opacity: 1, x: 0, rotate: 0 }}
+                  initial={{ x: i % 2 ? 80 : -80, rotate: i % 2 ? 20 : -20 }}
+                  whileInView={{ x: 0, rotate: 0 }}
                   viewport={{ once: true, amount: 0.6 }}
                   transition={{ type: "spring", stiffness: 140, damping: 16, delay: (i % 2) * 0.08 }}
                 >

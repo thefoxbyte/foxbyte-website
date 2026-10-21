@@ -10,7 +10,7 @@ export function Footer() {
         <div className={styles.grid}>
           <div className={styles.brand}>
             <Wordmark height={22} tone="onDark" />
-            <p>PostgreSQL you run yourself, with every change on record and AI kept safely off main.</p>
+            <p>PostgreSQL you run yourself, with every schema change on record and AI kept safely off main.</p>
           </div>
           {footerColumns.map((col) => (
             <div key={col.title}>

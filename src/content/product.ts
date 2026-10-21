@@ -4,6 +4,7 @@ const install = { label: "Install FoxByte", href: "/download", primary: true };
 
 export const productOverview: PageContent = {
   slug: "product",
+  cta: { title: "See it around your own database.", lede: "Install FoxByte and import a copy of the Postgres you already run.", docs: { label: "Quickstart", href: "/docs/quickstart" } },
   path: "/product",
   crumb: "Product",
   meta: {
@@ -28,7 +29,7 @@ export const productOverview: PageContent = {
         { title: "Blackbox", body: "Every schema change recorded with who made it, in a hash chain nobody can quietly rewrite.", icon: "box", href: "/product/blackbox" },
         { title: "Realtime", body: "Every insert, update and delete as it commits, from your own server.", icon: "pulse", tag: "Enterprise", href: "/product/realtime" },
         { title: "Guardrails", body: "Destructive commands blocked, runaway deletes stopped at row 101.", icon: "shield", href: "/product/guardrails" },
-        { title: "Time travel & HA", body: "Restore to any second, keep backups off the machine, fail over in one command.", icon: "rewind", href: "/product/time-travel" },
+        { title: "Time travel & HA", body: "Restore to any second in the archived window, keep backups off the machine, fail over in one command.", icon: "rewind", href: "/product/time-travel" },
         { title: "Web console", body: "Dashboard, SQL editor, data grid and the Blackbox, served by the engine itself.", icon: "db", href: "/product/console" },
       ],
     },
@@ -41,7 +42,7 @@ export const productOverview: PageContent = {
         "Branching, backups and time travel happen beside the commit path, using a copy-on-write file system and asynchronous WAL archiving. The commit never waits for them.",
       ],
       bullets: ["One endpoint, :6432. The database name is the branch.", "TLS on by default; sslmode=require works out of the box.", "Drivers, ORMs and SQL work unchanged."],
-      visual: "branch",
+      visual: "timescrub",
     },
     {
       kind: "table",
@@ -67,6 +68,7 @@ export const productOverview: PageContent = {
 export const productPages: PageContent[] = [
   {
     slug: "branching",
+  cta: { title: "Make your first copy in seconds.", lede: "fox branch create qa, on the database you already have." },
     path: "/product/branching",
     crumb: "Branching",
     meta: {
@@ -77,7 +79,7 @@ export const productPages: PageContent[] = [
       eyebrow: "Branching",
       title: "Branch the whole database, not a dump of it",
       lede: "fox branch create qa clones every table, index and row in seconds, whatever the size. The branch is fully isolated: its writes never touch main, and main’s never touch it.",
-      ctas: [install, { label: "Branching in the docs", href: "/docs" }],
+      ctas: [install, { label: "Branching commands", href: "https://github.com/thefoxbyte/foxbyte#usage" }],
       visual: "branch",
     },
     blocks: [
@@ -131,6 +133,7 @@ export const productPages: PageContent[] = [
   },
   {
     slug: "blackbox",
+  cta: { title: "Put your schema on the record.", lede: "Every schema change is recorded from the moment you install. Verifying it is free, forever.", docs: { label: "Anchor format", href: "https://github.com/thefoxbyte/foxbyte/blob/main/docs/ledger-anchor-format.md" } },
     path: "/product/blackbox",
     crumb: "Blackbox",
     meta: {
@@ -163,8 +166,13 @@ export const productPages: PageContent[] = [
           "The table is append-only and every row is hash-chained to the one before it, so an edited or deleted entry breaks the chain and fox blackbox verify finds it.",
           "A database superuser could rewrite the rows and every hash after them. Anchors close that gap: every few minutes the engine signs a checkpoint of the chain with a key the database cannot read, and writes it outside the database. Copy them to an S3 bucket in Object Lock compliance mode and nobody can remove them, the bucket owner included.",
         ],
-        bullets: ["Checking anchors is free in every edition, including the standalone fox-verify.", "Writing anchors on a schedule is Enterprise.", "Clients log in as their own Postgres role, so nobody can forge the recorded actor."],
-        visual: "record",
+        bullets: [
+          "Tamper-evident for free: the hash chain and fox blackbox verify are in every edition.",
+          "Insider-proof in Enterprise: signed anchors on a schedule, kept where your own admins cannot rewrite them.",
+          "Checking anchors stays free in every edition, including the standalone fox-verify.",
+          "Clients log in as their own Postgres role, so nobody can forge the recorded actor.",
+        ],
+        visual: "anchor",
         reverse: true,
       },
       {
@@ -204,6 +212,7 @@ export const productPages: PageContent[] = [
   },
   {
     slug: "guardrails",
+  cta: { title: "Let people and agents move fast, safely.", lede: "The guardrails are on from the first install. Tune them per table when you need to.", docs: { label: "Policy error reference", href: "https://github.com/thefoxbyte/foxbyte/blob/main/docs/policy-errors.md" } },
     path: "/product/guardrails",
     crumb: "Guardrails",
     meta: {
@@ -213,7 +222,7 @@ export const productPages: PageContent[] = [
     hero: {
       eyebrow: "Guardrails",
       title: "Refused, not regretted",
-      lede: "A policy gate stops a destructive change before it runs. An unqualified DELETE or a DROP TABLE from an agent never reaches your data, and every refusal is recorded.",
+      lede: "A policy gate stops a destructive change before it runs. An unqualified DELETE or a DROP TABLE from an agent never reaches your data, and every refusal is recorded. The rules guard against mistakes, not attackers: the access controls and the Blackbox handle those.",
       ctas: [install, { label: "Policy error reference", href: "https://github.com/thefoxbyte/foxbyte/blob/main/docs/policy-errors.md" }],
       visual: "refuse",
     },
@@ -222,6 +231,7 @@ export const productPages: PageContent[] = [
         kind: "grid",
         eyebrow: "The rules",
         title: "Defaults that ship switched on",
+        lede: "Guardrails catch the accident: the agent that loops, the migration that forgot its WHERE. Someone determined to do damage is stopped by roles, keys and the record of what they tried.",
         items: [
           { title: "No silent drops", body: "DROP TABLE, DROP SCHEMA and TRUNCATE are blocked by policy unless an admin overrides them, and the attempt is recorded.", icon: "shield" },
           { title: "No WHERE, no run", body: "An agent’s UPDATE or DELETE without a WHERE is refused outright.", icon: "box" },
@@ -335,21 +345,22 @@ export const productPages: PageContent[] = [
       { label: "Blackbox", href: "/product/blackbox" },
       { label: "Web console", href: "/product/console" },
     ],
-    cta: { title: "Realtime is part of Enterprise.", lede: "Start with Standard today and switch in place when you need the live feed." },
+    cta: { title: "Realtime is part of Enterprise.", lede: "Start with Standard today and switch in place when you need the live feed.", docs: { label: "Compare editions", href: "/pricing" } },
   },
   {
     slug: "time-travel",
+  cta: { title: "Know you can get it back.", lede: "Backups start in the first minutes. Send them off the machine with one command." },
     path: "/product/time-travel",
     crumb: "Time travel & HA",
     meta: {
       title: "Point-in-time restore, backups and failover for Postgres",
-      description: "Continuous WAL archival, automatic base backups, restore to any second, S3 targets with Object Lock, a hot standby and a failover drill that reports what it cost.",
+      description: "Continuous WAL archival, automatic base backups, restore to any second in the archived window, S3 targets with Object Lock, a hot standby and a failover drill that reports what it cost.",
     },
     hero: {
       eyebrow: "Time travel & HA",
       title: "A rewind button for your data",
       lede: "Restore the database as it was at any second in the archived window, into a separate copy, without touching the live database.",
-      ctas: [install, { label: "Backups in the docs", href: "/docs" }],
+      ctas: [install, { label: "Backup commands", href: "https://github.com/thefoxbyte/foxbyte#usage" }],
       visual: "timescrub",
     },
     blocks: [
@@ -401,6 +412,7 @@ export const productPages: PageContent[] = [
   },
   {
     slug: "console",
+  cta: { title: "Open the console in minutes.", lede: "It ships inside the engine and opens by itself when setup finishes.", docs: { label: "Quickstart", href: "/docs/quickstart" } },
     path: "/product/console",
     crumb: "Web console",
     meta: {
@@ -410,7 +422,7 @@ export const productPages: PageContent[] = [
     hero: {
       eyebrow: "Web console",
       title: "The whole database, in one tab",
-      lede: "The console is built into the engine and opens by itself after setup at https://localhost:8080. Nothing extra to install, in light or dark.",
+      lede: "The console is built into the engine and opens by itself after setup at https://localhost:8080. Your browser warns about the self-signed certificate the first time; accept it once, or give FoxByte a real certificate with FOX_TLS_CERT and FOX_TLS_KEY.",
       ctas: [install],
       visual: "console",
     },

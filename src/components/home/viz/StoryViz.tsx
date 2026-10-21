@@ -246,3 +246,59 @@ export function RefuseViz() {
     </div>
   );
 }
+
+const anchorRows = [
+  { id: 118, op: "ALTER TABLE orders ADD note", hash: "3b1e" },
+  { id: 119, op: "CREATE INDEX ON orders (day)", hash: "8c02" },
+  { id: 120, op: "GRANT SELECT ON orders", hash: "f47a" },
+  { id: 121, op: "ALTER TABLE users ADD plan", hash: "19dd" },
+];
+
+export function AnchorViz() {
+  const t = useTick(1300, 6);
+  const shown = Math.min(anchorRows.length, t + 1);
+  const sealed = t >= 3;
+  const shipped = t >= 4;
+  const verified = t >= 5;
+  return (
+    <div className={styles.in}>
+      <span className={styles.title}>$ fox blackbox integrity</span>
+      <div className={styles.anchor}>
+        <div className={styles.anchorRows}>
+          {anchorRows.map((r, i) => (
+            <m.div key={r.id} className={styles.anchorRow} initial={false} animate={{ opacity: i < shown ? 1 : 0.15, borderColor: sealed && i < shown ? "rgba(238,108,77,.55)" : "rgba(255,255,255,.09)" }} transition={{ duration: 0.4 }}>
+              <span className={styles.dimText}>#{r.id}</span>
+              <span className={styles.op}>{r.op}</span>
+              <span className={styles.hash}>{r.hash}</span>
+            </m.div>
+          ))}
+        </div>
+        <m.div className={styles.seal} initial={false} animate={{ opacity: sealed ? 1 : 0.2, scale: sealed ? 1 : 0.96 }} transition={{ duration: 0.4 }}>
+          <b>checkpoint #118–121</b>
+          <span>merkle root a91f…c3 · signed ✓</span>
+        </m.div>
+        <m.div className={styles.vault} initial={false} animate={{ opacity: shipped ? 1 : 0.2, x: shipped ? 0 : -10 }} transition={{ duration: 0.45 }}>
+          <svg width="16" height="18" viewBox="0 0 16 18" fill="none" aria-hidden="true">
+            <rect x="2" y="8" width="12" height="9" rx="2" stroke="#ee6c4d" strokeWidth="1.6" />
+            <path d="M5 8V5.5a3 3 0 016 0V8" stroke="#ee6c4d" strokeWidth="1.6" />
+          </svg>
+          <span>s3://audit-anchors · Object Lock · 365 days</span>
+        </m.div>
+      </div>
+      <div className={styles.cap}>
+        <AnimatePresence mode="wait">
+          {verified ? (
+            <m.span key="ok" className={`${styles.badge} ${styles.badgeOk}`} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
+              ✓ rows match every anchor
+            </m.span>
+          ) : (
+            <m.span key="wait" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+              {shipped ? "copied off the machine…" : sealed ? "checkpoint signed…" : "recording…"}
+            </m.span>
+          )}
+        </AnimatePresence>
+        <span>proof even against a superuser</span>
+      </div>
+    </div>
+  );
+}

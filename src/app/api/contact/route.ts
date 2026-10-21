@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 type Payload = { name?: unknown; email?: unknown; company?: unknown; topic?: unknown; message?: unknown; website?: unknown };
 
 const limits = { name: 120, email: 200, company: 160, topic: 40, message: 4000 };
-const topics = new Set(["Enterprise", "Partnership", "Press", "Other"]);
+const topics = new Set(["Enterprise", "Partnership", "Bug report", "Press", "Other"]);
 const recent = new Map<string, number[]>();
 
 function clean(value: unknown, max: number) {

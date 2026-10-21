@@ -23,10 +23,10 @@ export const marqueeItems = [
 ] as const;
 
 export const statement =
-  "You own the data and you answer for it. FoxByte gives you *a *record *of *every *change, *a *live *feed *of *every *row and *a *way *back *from *any *mistake.";
+  "You own the data and you answer for it. FoxByte gives you *a *record *of *every *schema *change, *a *live *feed *of *every *row and *a *way *back *from *any *mistake.";
 
 export const statementChips = [
-  { text: "Every change on record", tag: "Blackbox" },
+  { text: "Every schema change on record", tag: "Blackbox" },
   { text: "Every row, live", tag: "Realtime" },
   { text: "From MySQL in one command", tag: "Migrations" },
   { text: "AI on a copy", tag: "Branches" },
@@ -34,9 +34,9 @@ export const statementChips = [
 
 export const suitPieces = [
   { title: "Branches", line: "a full copy in seconds" },
-  { title: "Blackbox", line: "every change on record" },
+  { title: "Blackbox", line: "every schema change, on record" },
   { title: "Realtime", line: "every row, live" },
-  { title: "Time travel", line: "rewind to any second" },
+  { title: "Time travel", line: "rewind within the archive" },
   { title: "Guardrails", line: "stops mistakes first" },
   { title: "Migrations", line: "in from 8 sources" },
   { title: "ETL pipelines", line: "tested before they land" },
@@ -52,7 +52,7 @@ export const storySteps = [
   },
   {
     key: "02 · Blackbox",
-    title: "Every change, on record",
+    title: "Every schema change, on record",
     body: "Every CREATE, ALTER, DROP and GRANT is written down the moment it happens, with who made it and from which tool. Entries are chained, so nobody can quietly rewrite history, and any entry is a way back to main as it was just before.",
     enterprise: false,
   },

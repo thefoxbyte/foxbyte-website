@@ -3,7 +3,6 @@
 import { useState, type FormEvent } from "react";
 import { AnimatePresence } from "motion/react";
 import * as m from "motion/react-m";
-import { site } from "@/content/site";
 import { Arrow } from "@/components/ui/icons";
 import styles from "./ContactForm.module.css";
 
@@ -11,7 +10,7 @@ type Status = "idle" | "sending" | "sent" | "error" | "unavailable";
 
 const messages: Record<"error" | "unavailable", string> = {
   error: "That didn’t go through. Check the fields and try again in a moment.",
-  unavailable: "The form isn’t connected yet. Reach us on GitHub Discussions instead, and we’ll reply there.",
+  unavailable: "We couldn’t take your message right now. Please try again a little later.",
 };
 
 export function ContactForm() {
@@ -57,6 +56,7 @@ export function ContactForm() {
           <select id="contact-topic" name="topic" defaultValue="Enterprise">
             <option>Enterprise</option>
             <option>Partnership</option>
+            <option>Bug report</option>
             <option>Press</option>
             <option>Other</option>
           </select>
@@ -83,12 +83,7 @@ export function ContactForm() {
           )}
           {(status === "error" || status === "unavailable") && (
             <m.p key={status} className={styles.bad} role="alert" initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
-              {messages[status]}{" "}
-              {status === "unavailable" && (
-                <a href={`${site.github}/discussions`} target="_blank" rel="noopener noreferrer">
-                  Open Discussions
-                </a>
-              )}
+              {messages[status]}
             </m.p>
           )}
         </AnimatePresence>

@@ -95,7 +95,7 @@
 
 .pill b {
   font-weight: 600;
-  color: var(--navy);
+  color: #141922;
   background: var(--coral);
   padding: 2px 9px;
   border-radius: 999px;
@@ -377,7 +377,7 @@
 
 @media (max-width: 1020px) {
   .inner {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .tiles {

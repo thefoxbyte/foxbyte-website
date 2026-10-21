@@ -16,6 +16,7 @@ const core: Entry[] = [
   { path: "/security", priority: 0.7, changeFrequency: "monthly" },
   { path: "/why-foxbyte", priority: 0.7, changeFrequency: "monthly" },
   { path: "/docs", priority: 0.8, changeFrequency: "weekly" },
+  { path: "/docs/quickstart", priority: 0.8, changeFrequency: "monthly" },
   { path: "/blog", priority: 0.6, changeFrequency: "weekly" },
   { path: "/changelog", priority: 0.6, changeFrequency: "weekly" },
   { path: "/company", priority: 0.5, changeFrequency: "yearly" },

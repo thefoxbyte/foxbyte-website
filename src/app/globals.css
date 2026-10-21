@@ -2,6 +2,7 @@
   --white: #ffffff;
   --navy: #293241;
   --coral: #ee6c4d;
+  --coral-on-navy: #f4896d;
   --bg: #ffffff;
   --bg-2: #f4f5f7;
   --fg: #293241;
@@ -9,7 +10,7 @@
   --line: #e3e6eb;
   --card: #ffffff;
   --card-line: #e3e6eb;
-  --accent-ink: #c14a2b;
+  --accent-ink: #bb4527;
   --chip: #f1f3f6;
   --chip-line: #e1e5ea;
   --chip-fg: #293241;
@@ -30,10 +31,10 @@
   --tile-hi: rgba(255, 255, 255, 0.9);
   --ear-left: #293241;
   --ear-notch: #ffffff;
-  --ok: #1f9d6f;
+  --ok: #167a56;
   --bad: #d9472f;
-  --screen: #293241;
-  --screen-2: #222a37;
+  --screen: #232b39;
+  --screen-2: #1c2330;
   --band: #293241;
   --band-2: #222a37;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
@@ -121,7 +122,7 @@
 }
 
 :root[data-intro] {
-  --intro-delay: 1.5s;
+  --intro-delay: 1.15s;
 }
 
 ::view-transition-old(root),
@@ -258,7 +259,7 @@ button {
 .tag-e {
   font-family: var(--font-mono), ui-monospace, monospace;
   font-size: 11px;
-  color: var(--navy);
+  color: #141922;
   background: var(--coral);
   padding: 2px 8px;
   border-radius: 999px;
@@ -298,7 +299,7 @@ button {
 
 .btn.primary {
   background: var(--coral);
-  color: var(--navy);
+  color: #141922;
   box-shadow: 0 10px 30px -12px rgba(238, 108, 77, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.35);
 }
 
@@ -385,7 +386,7 @@ button {
   padding: 10px 16px;
   border-radius: 10px;
   background: var(--coral);
-  color: var(--navy);
+  color: #141922;
   font-weight: 600;
 }
 

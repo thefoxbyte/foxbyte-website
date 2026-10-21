@@ -19,7 +19,6 @@ export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: { default: site.title, template: "%s | FoxByte" },
   description: site.description,
-  keywords: [...site.keywords],
   applicationName: site.name,
   creator: site.name,
   publisher: site.name,

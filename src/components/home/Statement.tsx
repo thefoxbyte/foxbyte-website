@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, type ReactNode } from "react";
-import { useScroll, useTransform, type MotionValue } from "motion/react";
+import { useScroll, useTransform, type MotionStyle, type MotionValue } from "motion/react";
 import * as m from "motion/react-m";
 import { statement, statementChips } from "@/content/home";
 import styles from "./Statement.module.css";
@@ -9,10 +9,10 @@ import styles from "./Statement.module.css";
 const ease = [0.22, 1, 0.36, 1] as const;
 
 function Word({ progress, from, to, accent, children }: { progress: MotionValue<number>; from: number; to: number; accent: boolean; children: ReactNode }) {
-  const opacity = useTransform(progress, [from, to], [0.13, 1]);
+  const lit = useTransform(progress, [from, to], ["0%", "100%"]);
   const y = useTransform(progress, [from, to], [6, 0]);
   return (
-    <m.span className={accent ? styles.accent : undefined} style={{ opacity, y, display: "inline-block" }}>
+    <m.span className={`${styles.word} ${accent ? styles.accent : ""}`} style={{ "--lit": lit, y } as MotionStyle}>
       {children}
     </m.span>
   );
@@ -38,7 +38,7 @@ export function Statement() {
         </p>
         <div className={styles.chips}>
           {statementChips.map((c, i) => (
-            <m.div key={c.tag} className={styles.chip} initial={{ opacity: 0.3, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.6 }} transition={{ delay: i * 0.08, duration: 0.6, ease }}>
+            <m.div key={c.tag} className={styles.chip} initial={{ y: 16 }} whileInView={{ y: 0 }} viewport={{ once: true, amount: 0.6 }} transition={{ delay: i * 0.08, duration: 0.6, ease }}>
               {c.text}
               <b>→ {c.tag}</b>
             </m.div>

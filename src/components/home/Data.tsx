@@ -110,7 +110,7 @@ function Snip({ lines }: { lines: string[] }) {
 
 function Card({ delay, children }: { delay: number; children: ReactNode }) {
   return (
-    <m.article className={styles.card} initial={{ opacity: 0.3, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.25 }} transition={{ duration: 0.7, ease, delay }}>
+    <m.article className={styles.card} initial={{ y: 30 }} whileInView={{ y: 0 }} viewport={{ once: true, amount: 0.25 }} transition={{ duration: 0.7, ease, delay }}>
       {children}
     </m.article>
   );

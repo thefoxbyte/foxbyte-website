@@ -38,12 +38,32 @@
 }
 
 .ans {
-  overflow: hidden;
+  display: grid;
+  grid-template-rows: 0fr;
+  visibility: hidden;
+  transition: grid-template-rows 0.35s var(--ease), visibility 0s linear 0.35s;
 }
 
-.ans p {
+.open .ans {
+  grid-template-rows: 1fr;
+  visibility: visible;
+  transition: grid-template-rows 0.35s var(--ease), visibility 0s;
+}
+
+.ansIn {
+  overflow: hidden;
+  min-height: 0;
+}
+
+.ansIn p {
   padding-bottom: 24px;
   color: var(--muted);
   font-size: 17px;
   max-width: 68ch;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.open .ansIn p {
+  opacity: 1;
 }

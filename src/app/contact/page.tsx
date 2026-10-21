@@ -6,14 +6,14 @@ import styles from "./contact.module.css";
 
 export const metadata = pageMetadata({
   title: "Contact",
-  description: "Talk to the FoxByte team about Enterprise, partnerships or press, or reach the community on GitHub.",
+  description: "Talk to the FoxByte team about Enterprise, pilots, partnerships or press, report a bug, or report a vulnerability privately.",
   path: "/contact",
 });
 
 const channels = [
-  { title: "Questions and ideas", body: "Ask the community and the maintainers in GitHub Discussions.", href: `${site.github}/discussions`, label: "Open Discussions" },
-  { title: "Bugs", body: "Found something broken? Open an issue with the steps to reproduce it.", href: `${site.github}/issues`, label: "Open an issue" },
-  { title: "Security", body: "Please report vulnerabilities privately through GitHub’s security advisories, never in a public issue.", href: `${site.github}/security`, label: "Report privately" },
+  { title: "Enterprise", body: "Licences and support for FoxByte on your own hardware. Choose Enterprise in the form and the team that builds FoxByte replies.", href: "#contact-name", label: "Use the form", external: false },
+  { title: "Bugs", body: "Found something broken? Send the steps to reproduce it through the form, choosing Bug report.", href: "#contact-topic", label: "Report a bug", external: false },
+  { title: "Security", body: "Please report vulnerabilities privately through GitHub’s security advisories, never in public.", href: `${site.github}/security`, label: "Report privately", external: true },
 ];
 
 export default function ContactPage() {
@@ -31,7 +31,7 @@ export default function ContactPage() {
               <div key={c.title} className={styles.channel}>
                 <h2>{c.title}</h2>
                 <p>{c.body}</p>
-                <a href={c.href} target="_blank" rel="noopener noreferrer">
+                <a href={c.href} {...(c.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}>
                   {c.label} →
                 </a>
               </div>

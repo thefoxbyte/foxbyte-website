@@ -149,6 +149,9 @@ export function Nav() {
             GitHub
           </a>
           <ThemeToggle />
+          <Link href="/contact" className={`btn ghost sm ${styles.sales}`}>
+            Contact sales
+          </Link>
           <Magnetic className={`btn primary sm ${styles.install}`} href="/download">
             Install
             <Arrow />
@@ -180,6 +183,9 @@ export function Nav() {
                   </Link>
                 </m.div>
               ))}
+              <Link href="/contact" className={styles.sheetLink}>
+                Contact sales
+              </Link>
               <Link href="/download" className={`btn primary ${styles.sheetCta}`}>
                 Install FoxByte
                 <Arrow />

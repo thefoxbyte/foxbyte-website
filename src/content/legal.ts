@@ -61,7 +61,14 @@ export const legalDocs: LegalDoc[] = [
         bullets: [
           "fox-theme: whether you chose light or dark mode.",
           "foxbot-hidden: whether you hid FoxBot.",
-          "fox-intro, in session storage: whether the opening animation already played in this tab.",
+          "fox-intro-at: when the opening animation last played, so it plays at most once every 12 hours.",
+        ],
+      },
+      {
+        heading: "FoxBot",
+        paragraphs: [
+          "FoxBot, the small robot in the corner, is an animation that runs entirely in your browser. The messages it shows, such as connected or blackbox +1, are made up on the page to illustrate the product. It does not connect to any database, send anything anywhere or record what you do.",
+          "Its menu can copy the install command to your clipboard, take you on a tour of the home page, or hide it. Hiding it is remembered in your browser only.",
         ],
       },
       {

@@ -14,7 +14,7 @@ function Card({ wide, title, enterprise, soon, body, children }: { wide?: boolea
     e.currentTarget.style.setProperty("--my", `${e.clientY - r.top}px`);
   };
   return (
-    <m.article className={`${styles.card} ${wide ? styles.wide : ""}`} onMouseMove={move} initial={{ opacity: 0.3, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.25 }} transition={{ duration: 0.7, ease }}>
+    <m.article className={`${styles.card} ${wide ? styles.wide : ""}`} onMouseMove={move} initial={{ y: 30 }} whileInView={{ y: 0 }} viewport={{ once: true, amount: 0.25 }} transition={{ duration: 0.7, ease }}>
       <h3>
         {title}
         {enterprise && <span className="tag-e">Enterprise</span>}
@@ -36,7 +36,7 @@ export function Features() {
           <p className="lede">Backups, time travel and high availability come built in. So does a way out of the one change you wish you hadn’t made.</p>
         </div>
         <div className={styles.bento}>
-          <Card wide title="Time travel" body="Every change is archived in the background, so you can rebuild the database at any second you choose. It opens as a separate copy, and main never notices.">
+          <Card wide title="Time travel" body="Every change is archived in the background, so you can rebuild the database at any second in the archived window. It opens as a separate copy, and main never notices.">
             <TimeScrub />
           </Card>
           <Card title="Scales to zero" body="Idle branches go to sleep and wake on the next connection, at the same address.">

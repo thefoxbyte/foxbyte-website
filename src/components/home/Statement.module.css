@@ -8,8 +8,13 @@
   max-width: 860px;
 }
 
+.word {
+  display: inline-block;
+  color: color-mix(in srgb, var(--fg) var(--lit, 100%), var(--muted));
+}
+
 .accent {
-  color: var(--accent-ink);
+  color: color-mix(in srgb, var(--accent-ink) var(--lit, 100%), var(--muted));
 }
 
 .chips {

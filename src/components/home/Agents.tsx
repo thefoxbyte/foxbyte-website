@@ -22,8 +22,8 @@ export function Agents() {
           <p className="lede">Hand an agent a real database, not a mock. It can build, break and try again on its own copy while main never feels a thing.</p>
           <ul className={styles.points}>
             {agentPoints.map((p, i) => (
-              <m.li key={p} initial={{ opacity: 0.3, x: -14 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, amount: 0.8 }} transition={{ delay: i * 0.1, duration: 0.6, ease }}>
-                <Check color="#c14a2b" />
+              <m.li key={p} initial={{ x: -14 }} whileInView={{ x: 0 }} viewport={{ once: true, amount: 0.8 }} transition={{ delay: i * 0.1, duration: 0.6, ease }}>
+                <Check color="#bb4527" />
                 <span>{p}</span>
               </m.li>
             ))}
@@ -37,7 +37,7 @@ export function Agents() {
             ))}
           </div>
         </div>
-        <m.div initial={{ opacity: 0.3, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.8, ease }}>
+        <m.div initial={{ y: 30 }} whileInView={{ y: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.8, ease }}>
           <AgentCode />
         </m.div>
       </div>

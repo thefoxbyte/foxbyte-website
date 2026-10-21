@@ -303,7 +303,7 @@
   place-items: center;
   font-family: var(--font-mono), ui-monospace, monospace;
   font-size: 13px;
-  color: var(--navy);
+  color: #141922;
   background: var(--coral);
 }
 
@@ -494,7 +494,7 @@
   font-size: 12px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--coral);
+  color: var(--coral-on-navy);
   align-self: center;
 }
 

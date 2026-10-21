@@ -5,6 +5,7 @@ export type VisualKey =
   | "record"
   | "realtime"
   | "refuse"
+  | "anchor"
   | "migrate"
   | "etl"
   | "agentCode"
@@ -43,5 +44,5 @@ export type PageContent = {
   hero: Hero;
   blocks: Block[];
   related?: Link[];
-  cta?: { title: string; lede: string };
+  cta?: { title: string; lede: string; docs?: Link };
 };

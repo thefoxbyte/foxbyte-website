@@ -11,7 +11,7 @@ const ease = [0.22, 1, 0.36, 1] as const;
 
 function Item({ text, color, i }: { text: string; color: string; i: number }) {
   return (
-    <m.li initial={{ opacity: 0.3, x: -10 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.06 }}>
+    <m.li initial={{ x: -10 }} whileInView={{ x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.06 }}>
       <Check color={color} />
       <span>{text}</span>
     </m.li>
@@ -28,7 +28,7 @@ export function Editions() {
           <p className="lede">The Blackbox, backups and guardrails are in every edition. Enterprise adds the live feed, pipelines and controls growing teams ask for next.</p>
         </div>
         <div className={styles.grid}>
-          <m.article className={styles.ed} initial={{ opacity: 0.3, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.7, ease }}>
+          <m.article className={styles.ed} initial={{ y: 30 }} whileInView={{ y: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.7, ease }}>
             <div>
               <h3>Standard</h3>
               <p className={styles.price}>
@@ -37,7 +37,7 @@ export function Editions() {
             </div>
             <ul>
               {editions.standard.map((x, i) => (
-                <Item key={x} text={x} color="#c14a2b" i={i} />
+                <Item key={x} text={x} color="#bb4527" i={i} />
               ))}
             </ul>
             <Magnetic className="btn ghost" to="start">
@@ -46,7 +46,7 @@ export function Editions() {
             </Magnetic>
             <p className={styles.note}>Using FoxByte doesn’t make your app AGPL. The SDKs are Apache-2.0.</p>
           </m.article>
-          <m.article className={`${styles.ed} ${styles.ent}`} initial={{ opacity: 0.3, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.7, ease, delay: 0.1 }}>
+          <m.article className={`${styles.ed} ${styles.ent}`} initial={{ y: 30 }} whileInView={{ y: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.7, ease, delay: 0.1 }}>
             <div>
               <h3>Enterprise</h3>
               <p className={styles.price}>

@@ -5,11 +5,13 @@ import { posts } from "@/content/blog";
 import { pageMetadata } from "@/lib/metadata";
 import styles from "@/components/page/Prose.module.css";
 
-export const metadata = pageMetadata({
+const base = pageMetadata({
   title: "Engineering notes",
   description: "How FoxByte is built: branching Postgres without a new storage engine, tamper-evident records, and guardrails for AI agents, with the measurements behind them.",
   path: "/blog",
 });
+
+export const metadata = { ...base, alternates: { ...base.alternates, types: { "application/rss+xml": "/blog/rss.xml" } } };
 
 const format = (d: string) => new Date(`${d}T00:00:00Z`).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
 

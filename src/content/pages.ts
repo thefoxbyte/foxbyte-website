@@ -36,8 +36,8 @@ export const aiAgentsPage: PageContent = {
       eyebrow: "Two ways in",
       title: "MCP for agent frameworks, HTTP for everything else",
       body: "fox mcp speaks the Model Context Protocol on stdio, so any MCP client can drive it through one standard interface. The Agent Branch API hands back a ready connection string over HTTP.",
-      lines: ["$ FOX_API_KEY=key_… fox mcp", "$ fox serve --addr :8088", "$ curl -H \"Authorization: Bearer $FOX_KEY\" -X POST https://localhost:8088/agents/alice/branch", "{ \"dsn\": \"postgresql://agent-alice:key_…@localhost:6432/agent-alice\" }"],
-      note: "MCP tools: create_branch, run_sql, changes, verify_blackbox, list_branches and delete_branch. DDL an agent runs is attributed to that agent automatically.",
+      lines: ["$ FOX_API_KEY=key_… fox mcp", "$ fox serve --addr :8088", "$ curl -k -H \"Authorization: Bearer $FOX_KEY\" -X POST https://localhost:8088/agents/alice/branch", "{ \"dsn\": \"postgresql://agent-alice:key_…@localhost:6432/agent-alice\" }"],
+      note: "-k accepts the self-signed certificate a fresh install uses; drop it once you give FoxByte a real certificate. MCP tools: create_branch, run_sql, changes, verify_blackbox, list_branches and delete_branch. DDL an agent runs is attributed to that agent automatically.",
     },
     {
       kind: "grid",
@@ -79,6 +79,7 @@ export const aiAgentsPage: PageContent = {
 
 export const useCasesPage: PageContent = {
   slug: "use-cases",
+  cta: { title: "Pick the job you need done first.", lede: "Each one starts with the same install and a single command." },
   path: "/use-cases",
   crumb: "Use cases",
   meta: {
@@ -99,7 +100,7 @@ export const useCasesPage: PageContent = {
       title: "A database for every pull request",
       body: ["Branch main when a pull request opens, point the preview deployment at it, and delete it on merge. Each preview gets real, full-size data, and idle previews cost nothing while they sleep."],
       lines: ["$ fox branch create pr-1482", "$ fox branch delete pr-1482"],
-      visual: "branch",
+      visual: "sleep",
     },
     {
       kind: "split",
@@ -220,6 +221,7 @@ export const pricingPage: PageContent = {
 
 export const securityPage: PageContent = {
   slug: "security",
+  cta: { title: "Review it like a security team would.", lede: "Read the code, verify the release, and report anything you find privately.", docs: { label: "Report a vulnerability", href: "https://github.com/thefoxbyte/foxbyte/security" } },
   path: "/security",
   crumb: "Security",
   meta: {
@@ -251,8 +253,8 @@ export const securityPage: PageContent = {
       kind: "code",
       eyebrow: "Supply chain",
       title: "Verify what you install",
-      body: "Every release’s SHA256SUMS is signed with the FoxByte release key. The installer checks it, and fox update never installs a release that fails. Each file has a GitHub build attestation, and each release an SPDX SBOM.",
-      lines: ["$ gh attestation verify fox-darwin-arm64 --repo thefoxbyte/foxbyte", "$ gh attestation verify oci://ghcr.io/thefoxbyte/postgres-walg:18 --repo thefoxbyte/foxbyte"],
+      body: "Every release’s SHA256SUMS is signed with the FoxByte release key. The installer checks that signature wherever OpenSSL 3 is available; macOS ships LibreSSL, which cannot, so there it checks every file against SHA256SUMS and warns. Set FOX_REQUIRE_SIGNATURE=1 to refuse instead. fox update checks the signature on every update and never installs a release that fails. Each file has a GitHub build attestation, and each release an SPDX SBOM.",
+      lines: [`$ ${site.install.replace(/\| sh$/, "| FOX_REQUIRE_SIGNATURE=1 sh")}`, "$ gh attestation verify fox-darwin-arm64 --repo thefoxbyte/foxbyte", "$ gh attestation verify oci://ghcr.io/thefoxbyte/postgres-walg:18 --repo thefoxbyte/foxbyte"],
     },
     {
       kind: "grid",
@@ -268,7 +270,7 @@ export const securityPage: PageContent = {
       kind: "steps",
       eyebrow: "Disclosure",
       title: "Report a vulnerability privately",
-      lede: "Please do not open a public issue for security problems. FoxByte is pre-1.0 hardening in places, and we would rather hear first.",
+      lede: "Please do not open a public issue for security problems. We would rather hear first, and we answer quickly.",
       items: [
         { title: "Report", body: "Use GitHub’s private vulnerability reporting: the repository’s Security tab, then Report a vulnerability." },
         { title: "Acknowledgement", body: "Within 3 business days." },
@@ -337,6 +339,7 @@ export const whyPage: PageContent = {
 
 export const docsPage: PageContent = {
   slug: "docs",
+  cta: { title: "Start with the quickstart.", lede: "Five minutes from install to a branch you can connect to.", docs: { label: "Quickstart", href: "/docs/quickstart" } },
   path: "/docs",
   crumb: "Docs",
   meta: {
@@ -347,22 +350,22 @@ export const docsPage: PageContent = {
     eyebrow: "Docs",
     title: "Documentation",
     lede: "Everything you need to install FoxByte, connect your app and run it in production. The full reference lives with the code on GitHub.",
-    ctas: [{ label: "Quickstart", href: `${repo}#quickstart`, primary: true }, { label: "All docs on GitHub", href: `${repo}/tree/main/docs` }],
+    ctas: [{ label: "Quickstart", href: "/docs/quickstart", primary: true }, { label: "All docs on GitHub", href: `${repo}/tree/main/docs` }],
   },
   blocks: [
     {
       kind: "code",
       eyebrow: "Quickstart",
       title: "From nothing to a branch in four commands",
-      body: "After setup the console opens by itself with a one-time setup token in the link. main already has three small sample tables, so there is something to branch straight away.",
-      lines: [`$ ${site.install}`, "$ fox setup", "$ fox branch create qa", "$ psql \"postgresql://dbadmin:<API_KEY>@localhost:6432/qa?sslmode=require\""],
+      body: "After setup the console opens by itself with a one-time setup token in the link. main already has three small sample tables, so there is something to branch straight away. On Windows, install with PowerShell; the full walk-through is in the quickstart.",
+      lines: [`$ ${site.install}`, "$ fox setup", "# on Linux: sudo fox start instead of fox setup", "$ fox branch create qa", "$ psql \"postgresql://dbadmin:<API_KEY>@localhost:6432/qa?sslmode=require\""],
     },
     {
       kind: "grid",
       eyebrow: "Guides",
       title: "Start here",
       items: [
-        { title: "Install and quickstart", body: "macOS, Linux and Windows, and your first branch.", icon: "import", href: `${repo}#install` },
+        { title: "Install and quickstart", body: "macOS, Linux and Windows, and your first branch.", icon: "import", href: "/docs/quickstart" },
         { title: "Connect your app", body: "One connection string for every driver and ORM.", icon: "db", href: `${repo}#connect-your-app` },
         { title: "MCP and agents", body: "Point an MCP client at fox mcp, and the full tool reference.", icon: "branch", href: `${repo}/blob/main/docs/mcp.md` },
         { title: "Blackbox anchors", body: "The anchor file format, and how to verify a ledger independently.", icon: "box", href: `${repo}/blob/main/docs/ledger-anchor-format.md` },
@@ -392,11 +395,12 @@ export const docsPage: PageContent = {
 
 export const companyPage: PageContent = {
   slug: "company",
+  cta: { title: "Talk to the people who build it.", lede: "Questions about Enterprise, partnerships or the roadmap go straight to the team.", docs: { label: "Contact us", href: "/contact" } },
   path: "/company",
   crumb: "Company",
   meta: {
     title: "About",
-    description: "FoxByte builds PostgreSQL you run yourself, with every change on record, a live feed of every row, and AI kept safely off main.",
+    description: "FoxByte builds PostgreSQL you run yourself, with every schema change on record, a live feed of every row, and AI kept safely off main.",
   },
   hero: {
     eyebrow: "Company",

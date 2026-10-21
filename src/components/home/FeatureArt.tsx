@@ -149,7 +149,7 @@ export function SecureArt() {
   return (
     <div className={styles.stack}>
       {secure.map((x, i) => (
-        <m.div key={x} className={`${styles.chip} ${styles.wrapChip} ${styles.row}`} initial={{ opacity: 0.3, x: -10 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: 0.15 + i * 0.12 }}>
+        <m.div key={x} className={`${styles.chip} ${styles.wrapChip} ${styles.row}`} initial={{ x: -10 }} whileInView={{ x: 0 }} viewport={{ once: true }} transition={{ delay: 0.15 + i * 0.12 }}>
           <span className={styles.plus}>✓</span>
           {x}
         </m.div>

@@ -184,7 +184,7 @@ export function FoxBot() {
   };
 
   const copy = async () => {
-    await copyText(site.install);
+    await copyText(navigator.userAgent.toLowerCase().includes("win") ? site.installWindows : site.install);
     setCopied(true);
     window.setTimeout(() => setCopied(false), 1500);
   };

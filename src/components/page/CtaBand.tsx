@@ -5,9 +5,9 @@ import { Magnetic } from "@/components/ui/Magnetic";
 import { Arrow } from "@/components/ui/icons";
 import styles from "./Page.module.css";
 
-type CtaBandProps = { title: string; lede: string; related?: LinkItem[] };
+type CtaBandProps = { title: string; lede: string; related?: LinkItem[]; docs?: LinkItem };
 
-export function CtaBand({ title, lede, related }: CtaBandProps) {
+export function CtaBand({ title, lede, related, docs = { label: "Read the docs", href: "/docs" } }: CtaBandProps) {
   return (
     <section className={styles.band}>
       <div className={`wrap ${styles.bandIn}`}>
@@ -19,8 +19,8 @@ export function CtaBand({ title, lede, related }: CtaBandProps) {
             Install FoxByte
             <Arrow />
           </Magnetic>
-          <Magnetic className="btn onBand" href="/docs">
-            Read the docs
+          <Magnetic className="btn onBand" href={docs.href} external={docs.href.startsWith("http")}>
+            {docs.label}
           </Magnetic>
         </div>
         {related && related.length > 0 && (

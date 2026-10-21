@@ -1,4 +1,54 @@
+.wrap {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+  max-width: 100%;
+  justify-items: start;
+}
+
+.onBand {
+  justify-items: center;
+}
+
+.switch {
+  display: inline-flex;
+  gap: 4px;
+  padding: 3px;
+  border-radius: 999px;
+  background: var(--chip);
+  border: 1px solid var(--chip-line);
+}
+
+.onBand .switch {
+  background: rgba(0, 0, 0, 0.22);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.switch button {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 12px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  color: var(--muted);
+  transition: background-color 0.25s, color 0.25s;
+}
+
+.onBand .switch button {
+  color: #aeb6c3;
+}
+
+.switch .on {
+  background: var(--fg);
+  color: var(--bg);
+}
+
+.onBand .switch .on {
+  background: #ffffff;
+  color: #141922;
+}
+
 .install {
+  width: 100%;
   display: flex;
   align-items: center;
   gap: 12px;
@@ -13,7 +63,8 @@
   min-width: 0;
 }
 
-.onBand {
+.onBand .install {
+  width: auto;
   background: rgba(0, 0, 0, 0.22);
   border-color: rgba(255, 255, 255, 0.12);
   color: #dfe3ea;
@@ -32,7 +83,11 @@
 }
 
 .prompt {
-  color: var(--coral);
+  color: var(--accent-ink);
+}
+
+.onBand .prompt {
+  color: var(--coral-on-navy);
 }
 
 .copy {
@@ -46,6 +101,6 @@
   color: inherit;
 }
 
-.onBand .copy {
+.onBand .install .copy {
   background: rgba(255, 255, 255, 0.08);
 }

@@ -74,7 +74,7 @@ export function Hero() {
             </span>
           </h1>
           <p className={`${styles.sub} ${styles.rise}`} style={{ "--d": ".45s" } as CSSProperties}>
-            FoxByte is PostgreSQL on your own servers, with a Blackbox that records every change, a live feed of every row and one-command migrations. People and AI work on instant copies. Main stays exactly as you left it.
+            FoxByte is PostgreSQL on your own servers, with a Blackbox that records every schema change, a live feed of every row and one-command migrations. People and AI work on instant copies. Main stays exactly as you left it.
           </p>
           <div className={`${styles.ctas} ${styles.rise}`} style={{ "--d": ".6s" } as CSSProperties}>
             <Magnetic className="btn primary" to="start">

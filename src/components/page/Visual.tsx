@@ -2,7 +2,7 @@
 
 import type { ComponentType } from "react";
 import type { VisualKey } from "@/content/types";
-import { BranchViz, RealtimeViz, RecordViz, RefuseViz } from "@/components/home/viz/StoryViz";
+import { AnchorViz, BranchViz, RealtimeViz, RecordViz, RefuseViz } from "@/components/home/viz/StoryViz";
 import { EtlViz, MigrateViz } from "@/components/home/Data";
 import { AgentCode } from "@/components/home/AgentCode";
 import { HaArt, RequestArt, SecureArt, SleepArt, TimeScrub, TrackArt, UndoArt } from "@/components/home/FeatureArt";
@@ -10,7 +10,7 @@ import { Architecture } from "./Architecture";
 import { ShotFrame } from "./ShotFrame";
 import styles from "./Page.module.css";
 
-const screens: Partial<Record<VisualKey, ComponentType>> = { branch: BranchViz, record: RecordViz, realtime: RealtimeViz, refuse: RefuseViz };
+const screens: Partial<Record<VisualKey, ComponentType>> = { branch: BranchViz, record: RecordViz, realtime: RealtimeViz, refuse: RefuseViz, anchor: AnchorViz };
 const arts: Partial<Record<VisualKey, ComponentType>> = { timescrub: TimeScrub, undo: UndoArt, ha: HaArt, sleep: SleepArt, request: RequestArt, secure: SecureArt, track: TrackArt };
 
 export function Visual({ name }: { name: VisualKey }) {

@@ -17,10 +17,11 @@ const blocks: Block[] = [
     kind: "grid",
     eyebrow: "Requirements",
     title: "What you need",
+    lede: "The first setup takes a few minutes while it downloads the engine and, on macOS and Windows, a Linux image. Offline and air-gapped installs aren’t supported yet: the installer fetches the CLI from GitHub releases and the engine images from GHCR.",
     items: [
-      { title: "macOS", body: "Lima for the local Linux VM (brew install lima). Everything else is installed for you.", icon: "db" },
-      { title: "Linux", body: "Nothing extra. ZFS and Docker are provisioned the first time the engine starts.", icon: "box" },
-      { title: "Windows", body: "Windows 10 21H2 or later, or Windows 11, with virtualisation enabled. WSL is installed if it is missing.", icon: "pulse" },
+      { title: "macOS", body: "Apple silicon or Intel. Lima runs the local Linux VM (brew install lima); Docker and ZFS are set up inside it for you.", icon: "db" },
+      { title: "Linux", body: "arm64 or amd64, run with sudo. ZFS and Docker are provisioned the first time the engine starts.", icon: "box" },
+      { title: "Windows", body: "Windows 10 21H2 or later, or Windows 11, with virtualisation enabled. WSL is installed if it is missing, with a dedicated distro on btrfs.", icon: "pulse" },
     ],
   },
   {

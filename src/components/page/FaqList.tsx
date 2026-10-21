@@ -1,7 +1,6 @@
 "use client";
 
 import { useId, useState } from "react";
-import { AnimatePresence } from "motion/react";
 import * as m from "motion/react-m";
 import styles from "./FaqList.module.css";
 
@@ -14,9 +13,9 @@ export function FaqList({ items }: { items: readonly { q: string; a: string }[] 
         const isOpen = open === i;
         const id = `${base}-${i}`;
         return (
-          <div className={styles.q} key={f.q}>
+          <div className={`${styles.q} ${isOpen ? styles.open : ""}`} key={f.q}>
             <h3>
-              <button type="button" onClick={() => setOpen(isOpen ? -1 : i)} aria-expanded={isOpen} aria-controls={id}>
+              <button type="button" id={`${id}-q`} onClick={() => setOpen(isOpen ? -1 : i)} aria-expanded={isOpen} aria-controls={id}>
                 <span>{f.q}</span>
                 <m.span className={styles.pm} animate={{ rotate: isOpen ? 45 : 0 }}>
                   <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true">
@@ -25,13 +24,11 @@ export function FaqList({ items }: { items: readonly { q: string; a: string }[] 
                 </m.span>
               </button>
             </h3>
-            <AnimatePresence initial={false}>
-              {isOpen && (
-                <m.div id={id} className={styles.ans} initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}>
-                  <p>{f.a}</p>
-                </m.div>
-              )}
-            </AnimatePresence>
+            <div id={id} role="region" aria-labelledby={`${id}-q`} className={styles.ans}>
+              <div className={styles.ansIn}>
+                <p>{f.a}</p>
+              </div>
+            </div>
           </div>
         );
       })}
