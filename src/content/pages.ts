@@ -331,7 +331,7 @@ export const whyPage: PageContent = {
   hero: {
     eyebrow: "Why FoxByte",
     title: "We did not invent branching Postgres",
-    lede: "The copy-on-write-clone-as-a-database idea is Database Lab’s, Neon and Xata branch copy-on-write too, and Supabase and PlanetScale branch in some form. What is ours is what happens after the branch exists.",
+    lede: "The copy-on-write-clone-as-a-database idea is Database Lab’s, and other Postgres platforms branch in some form too. What is ours is what happens after the branch exists.",
     ctas: [install],
   },
   blocks: [
@@ -344,22 +344,6 @@ export const whyPage: PageContent = {
         { title: "A record you can prove", body: "A hash chain inside the database, signed anchors outside it, and a verifier anyone can run.", icon: "shield" },
         { title: "A gate before the damage", body: "Destructive commands refused by policy, and deletes without a WHERE refused.", icon: "pulse" },
       ],
-    },
-    {
-      kind: "table",
-      eyebrow: "Side by side",
-      title: "How the Postgres platforms compare",
-      lede: "From each vendor’s own documentation, read on 22 October 2026. Products move quickly: tell us if a cell is out of date and we will fix it.",
-      head: ["", "FoxByte", "Neon", "Supabase", "PlanetScale Postgres", "Database Lab", "Xata"],
-      rows: [
-        ["Copy-on-write branches", "Yes, in seconds", "Yes, instant", "No: a new branch starts empty", "No: empty, or restored from a backup", "Yes, 1 TiB in about 10 s", "Yes, in seconds"],
-        ["Run it yourself in production", "Yes, AGPL-3.0", "Not documented", "Yes, without branching or PITR", "No", "Yes, Apache-2.0", "Partly: the storage engine is closed"],
-        ["Tamper-evident record of schema changes", "Yes: hash chain and signed anchors", "Audit log via pgAudit", "Audit logs and pgAudit", "Organisation audit log", "Not documented", "Not documented"],
-        ["Stops an agent’s destructive SQL", "Yes: DROP, TRUNCATE and DML without WHERE", "Read-only mode and roles", "Read-only role; asks to confirm", "Yes: TRUNCATE and DML without WHERE", "No: isolation only", "No: isolation and review"],
-        ["Live row changes to clients", "Yes (Enterprise)", "Yes, in beta", "Yes", "No", "No", "No"],
-        ["Storage", "Stock Postgres, local disk", "Separate compute and storage", "Stock Postgres per project", "Stock Postgres, local NVMe or EBS", "Stock Postgres on ZFS or LVM", "Postgres on network block storage"],
-      ],
-      note: "Neon joined Databricks in May 2025; its database, Lakebase Postgres, is also offered on Databricks as Lakebase. Neon’s row rechecked on 23 October 2026. Sources: each vendor’s branching, self-hosting, audit, MCP, realtime and architecture documentation.",
     },
     {
       kind: "split",
