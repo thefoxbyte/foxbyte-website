@@ -64,6 +64,7 @@ export const footerColumns = [
     links: [
       { label: "Download", href: "/download" },
       { label: "Docs", href: "/docs" },
+      { label: "Support and versions", href: "/docs/support" },
       { label: "Changelog", href: "/changelog" },
       { label: "Blog", href: "/blog" },
       { label: "GitHub", href: repo },
