@@ -170,6 +170,13 @@
   max-width: 620px;
 }
 
+.installNote {
+  margin: 0;
+  font-size: 13.5px;
+  color: var(--muted);
+  max-width: 56ch;
+}
+
 .oses {
   font-family: var(--font-mono), ui-monospace, monospace;
   font-size: 12.5px;

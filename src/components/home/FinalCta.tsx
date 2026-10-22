@@ -45,7 +45,7 @@ export function FinalCta() {
         <m.h2 initial={{ y: 30 }} whileInView={{ y: 0 }} viewport={{ once: true, amount: 0.5 }} transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}>
           Your data. Your servers. <span className={styles.accent}>Your rules.</span>
         </m.h2>
-        <p className={`lede ${styles.lede}`}>Install FoxByte with one command. Bring your database over with one more.</p>
+        <p className={`lede ${styles.lede}`}>Install FoxByte in a few minutes. Bring your database over with one command.</p>
         <InstallCommand onBand />
         <div className={styles.ctas}>
           <Magnetic className="btn primary" href="/docs/quickstart">

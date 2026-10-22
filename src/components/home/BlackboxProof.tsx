@@ -18,7 +18,7 @@ export function BlackboxProof() {
           <span className="eyebrow">The Blackbox</span>
           <h2 className="h2">A record you can prove, not just a log you can read</h2>
           <p className="lede">
-            Every CREATE, ALTER, DROP and GRANT is written down as it happens: who made it, person or agent, from which tool and on which branch. Clients log in as their own Postgres role, so nobody can forge who did it.
+            Every change to a table, view, function or privilege is written down as it happens: who made it, person or agent, on which branch, and the tool the client reported. Clients log in as their own Postgres role, so the login on the record cannot be forged.
           </p>
           <ul className={styles.points}>
             {points.map((p) => (

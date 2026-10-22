@@ -1,6 +1,8 @@
 export const site = {
   name: "FoxByte",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
+  url:
+    process.env.NEXT_PUBLIC_SITE_URL ??
+    (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : "http://localhost:3000"),
   title: "FoxByte: every schema change on record, on PostgreSQL you run yourself",
   shortTitle: "FoxByte",
   description:
@@ -51,6 +53,7 @@ export const footerColumns = [
     links: [
       { label: "AI agents", href: "/ai-agents" },
       { label: "Use cases", href: "/use-cases" },
+      { label: "Regulated teams", href: "/regulated" },
       { label: "Why FoxByte", href: "/why-foxbyte" },
       { label: "Pricing", href: "/pricing" },
       { label: "Security", href: "/security" },

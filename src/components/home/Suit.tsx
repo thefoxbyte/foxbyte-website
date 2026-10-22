@@ -66,7 +66,7 @@ const head = (
     <span className={`eyebrow ${styles.eyebrow}`}>Not just Postgres</span>
     <h2 className="h2">Postgres, suited up.</h2>
     <p className={`lede ${styles.lede}`}>
-      Inside is the PostgreSQL you already trust, untouched and at full speed. FoxByte builds the suit around it, and every capability Postgres was missing locks into place.
+      Inside is the PostgreSQL you already trust, untouched: the same storage engine, the same planner, on your own disk. FoxByte builds the suit around it, and every capability Postgres was missing locks into place.
     </p>
   </div>
 );

@@ -75,7 +75,7 @@ export function Hero() {
             </span>
           </h1>
           <p className={`${styles.sub} ${styles.rise}`} style={{ "--d": ".45s" } as CSSProperties}>
-            FoxByte is PostgreSQL on servers you control. Its Blackbox records who changed what, and from which tool, in a hash chain nobody can quietly rewrite. People and AI work on instant copies, so main stays exactly as you left it.
+            FoxByte is PostgreSQL on servers you control. Its Blackbox records who changed what, and from which tool, in a tamper-evident hash chain, and with signed anchors kept off the machine (Enterprise) not even your own admins can rewrite it unnoticed. People and AI work on instant copies, so main stays exactly as you left it.
           </p>
           <div className={`${styles.ctas} ${styles.rise}`} style={{ "--d": ".6s" } as CSSProperties}>
             <Magnetic className="btn primary" to="start">
@@ -94,6 +94,7 @@ export function Hero() {
               <span>Windows</span>
               <span>Runs on your hardware</span>
             </div>
+            <p className={styles.installNote}>On macOS and Windows the engine runs in a small Linux VM that the first start downloads: a few minutes, once.</p>
           </div>
         </div>
         <div className={`${styles.demoWrap} ${styles.rise}`} style={{ "--d": ".5s" } as CSSProperties}>
