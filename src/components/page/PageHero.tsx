@@ -66,10 +66,10 @@ export function PageHero({ hero, trail }: { hero: Hero; trail: Crumb[] }) {
             {hero.eyebrow}
             {hero.tag && <span className="tag-e">{hero.tag}</span>}
           </span>
-          <h1 className={`${styles.h1} ${styles.rise}`} style={rise(".12s")}>
+          <h1 className={`${styles.h1} ${styles.riseText}`} style={rise(".12s")}>
             {hero.title}
           </h1>
-          <p className={`lede ${styles.rise}`} style={rise(".24s")}>
+          <p className={`lede ${styles.riseText}`} style={rise(".24s")}>
             {hero.lede}
           </p>
           {hero.ctas && (
