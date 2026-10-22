@@ -61,7 +61,7 @@ export const legalDocs: LegalDoc[] = [
         bullets: [
           "fox-theme: whether you chose light or dark mode.",
           "foxbot-hidden: whether you hid FoxBot.",
-          "fox-intro-at: when the opening animation last played, so it plays at most once every 12 hours.",
+          "fox-intro-at: when the opening animation last played on the home page, so it plays there at most once every 12 hours.",
         ],
       },
       {
