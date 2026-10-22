@@ -95,6 +95,10 @@
   animation-delay: calc(var(--intro-delay) + var(--d, 0s));
 }
 
+:global(:root[data-intro]) .riseText {
+  animation-name: rise;
+}
+
 .pill {
   display: inline-flex;
   gap: 10px;

@@ -13,7 +13,7 @@ function useTypedScript(reduce: boolean): ScriptState {
   const [started, setStarted] = useState(false);
 
   useEffect(() => {
-    const wait = document.documentElement.dataset.intro ? 1250 : 700;
+    const wait = document.documentElement.dataset.intro ? 3050 : 700;
     const t = window.setTimeout(() => setStarted(true), wait);
     return () => window.clearTimeout(t);
   }, []);

@@ -85,6 +85,10 @@
   animation-delay: calc(var(--intro-delay) + var(--d, 0s));
 }
 
+:global(:root[data-intro]) .riseText {
+  animation-name: rise;
+}
+
 .h1 {
   font-size: clamp(38px, 5vw, 64px);
   font-weight: 800;
