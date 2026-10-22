@@ -22,6 +22,31 @@
   max-width: 34ch;
 }
 
+.social {
+  list-style: none;
+  margin: 4px 0 0;
+  padding: 0;
+  display: flex;
+  gap: 10px;
+}
+
+.social a {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #d5dae3;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+
+.social a:hover {
+  color: #ffffff;
+  border-color: var(--coral-on-navy);
+  background: rgba(255, 255, 255, 0.04);
+}
+
 .title {
   font-family: var(--font-mono), ui-monospace, monospace;
   font-size: 12px;

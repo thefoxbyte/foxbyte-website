@@ -9,6 +9,8 @@ export const site = {
     "FoxByte is PostgreSQL on your own servers, with a Blackbox that records every schema change, a realtime feed of every row, one-command migrations and instant copies where people and AI work without touching main.",
   tagline: "Every schema change, on the record.",
   github: "https://github.com/thefoxbyte/foxbyte",
+  x: "https://x.com/getfoxbyte",
+  instagram: "https://www.instagram.com/getfoxbyte",
   contact: "/contact",
   install: "curl -fsSL https://get.thefoxbyte.com/install.sh | sh",
   installWindows: "irm https://get.thefoxbyte.com/install.ps1 | iex",

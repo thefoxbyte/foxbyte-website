@@ -14,6 +14,7 @@ const channels = [
   { title: "Enterprise", body: "Licences and support for FoxByte on your own hardware. Choose Enterprise in the form and the team that builds FoxByte replies.", href: "#contact-name", label: "Use the form", external: false },
   { title: "Bugs", body: "Found something broken? Send the steps to reproduce it through the form, choosing Bug report.", href: "#contact-topic", label: "Report a bug", external: false },
   { title: "Security", body: "Please report vulnerabilities privately through GitHub’s security advisories, never in public.", href: `${site.github}/security`, label: "Report privately", external: true },
+  { title: "Follow FoxByte", body: "Releases and news on X and Instagram, as @getfoxbyte.", href: site.x, label: "Follow on X", external: true, also: { href: site.instagram, label: "Instagram" } },
 ];
 
 export default function ContactPage() {
@@ -34,6 +35,11 @@ export default function ContactPage() {
                 <a href={c.href} {...(c.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}>
                   {c.label} →
                 </a>
+                {"also" in c && c.also && (
+                  <a href={c.also.href} target="_blank" rel="noopener noreferrer">
+                    {c.also.label} →
+                  </a>
+                )}
               </div>
             ))}
           </aside>

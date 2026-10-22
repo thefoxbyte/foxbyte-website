@@ -1,4 +1,5 @@
-import { footerColumns } from "@/content/site";
+import { footerColumns, site } from "@/content/site";
+import { GitHubIcon, InstagramIcon, XIcon } from "@/components/ui/icons";
 import { Wordmark } from "@/components/ui/Mark";
 import styles from "./Footer.module.css";
 
@@ -11,6 +12,19 @@ export function Footer() {
           <div className={styles.brand}>
             <Wordmark height={22} tone="onDark" />
             <p>PostgreSQL you run yourself, with every schema change on record and AI kept safely off main.</p>
+            <ul className={styles.social}>
+              {[
+                { label: "FoxByte on GitHub", href: site.github, icon: <GitHubIcon /> },
+                { label: "FoxByte on X", href: site.x, icon: <XIcon /> },
+                { label: "FoxByte on Instagram", href: site.instagram, icon: <InstagramIcon /> },
+              ].map((s) => (
+                <li key={s.href}>
+                  <a href={s.href} target="_blank" rel="noopener noreferrer me" aria-label={s.label} title={s.label}>
+                    {s.icon}
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
           {footerColumns.map((col) => (
             <div key={col.title}>
