@@ -401,7 +401,7 @@ export const docsPage: PageContent = {
     eyebrow: "Docs",
     title: "Documentation",
     lede: "Everything you need to install FoxByte, connect your app and run it in production. The full reference lives with the code on GitHub.",
-    ctas: [{ label: "Quickstart", href: "/docs/quickstart", primary: true }, { label: "All docs on GitHub", href: `${repo}/tree/main/docs` }],
+    ctas: [{ label: "Quickstart", href: "/docs/quickstart", primary: true }, { label: "Support and versions", href: "/docs/support" }, { label: "All docs on GitHub", href: `${repo}/tree/main/docs` }],
   },
   blocks: [
     {
@@ -688,4 +688,90 @@ export const regulatedPage: PageContent = {
     { label: "Data privacy", href: "/privacy" },
   ],
   cta: { title: "Tell us what your auditors ask for.", lede: "We will show you where FoxByte keeps the answer, and say plainly where it does not." },
+};
+
+export const supportPage: PageContent = {
+  slug: "support",
+  path: "/docs/support",
+  crumb: "Support and versions",
+  meta: {
+    title: "Support and versions: platforms, PostgreSQL, upgrades and limits",
+    description: "Where FoxByte runs, which PostgreSQL versions it supports, how far along it is, what it does not do yet, and how to upgrade and roll back.",
+  },
+  hero: {
+    eyebrow: "Support",
+    title: "What runs where, and what to expect",
+    lede: "The platforms and PostgreSQL versions FoxByte supports, how far along it is, what it does not do yet, and how upgrades and rollbacks work. Everything here is about the current release.",
+    ctas: [install, { label: "Changelog", href: "/changelog" }],
+  },
+  blocks: [
+    {
+      kind: "table",
+      eyebrow: "Platforms",
+      title: "Where it runs",
+      head: ["System", "Supported", "How the engine runs"],
+      rows: [
+        ["macOS", "Apple silicon and Intel", "In a Linux VM that fox setup creates with Lima (brew install lima first)"],
+        ["Linux", "arm64 and amd64, run with sudo", "Directly, with ZFS and Docker set up on first start"],
+        ["Windows", "Windows 10 21H2 or later, or Windows 11, with virtualisation on", "In a dedicated WSL2 distro that keeps branches on btrfs"],
+      ],
+      note: "The first setup downloads the engine and, on macOS and Windows, a Linux image: a few minutes, once.",
+    },
+    {
+      kind: "table",
+      eyebrow: "PostgreSQL",
+      title: "Which PostgreSQL",
+      head: ["", "Version"],
+      rows: [
+        ["A fresh install", "PostgreSQL 18"],
+        ["Existing installs, still supported", "PostgreSQL 16"],
+        ["Moving an install to a newer major", "fox pg upgrade: shows every change first, takes an export, and keeps the old databases until you finalise"],
+      ],
+      note: "fox update never moves your data between PostgreSQL majors. That is a migration, and it stays your call.",
+    },
+    {
+      kind: "list",
+      eyebrow: "Maturity",
+      title: "How far along it is",
+      items: [
+        "FoxByte is young. Releases come often, so read the changelog before you upgrade.",
+        "One primary, with an optional hot standby on the same machine or a second one. No sharding, and no multi-region cluster.",
+        "There is no paid support contract or service level yet. Questions and bugs go to GitHub issues; security problems to the private process on the Security page.",
+      ],
+    },
+    {
+      kind: "list",
+      eyebrow: "Known limits",
+      title: "What it does not do yet",
+      items: [
+        "Offline and air-gapped installs: the installer fetches the CLI from GitHub releases and the engine images from GHCR.",
+        "Encryption at rest: use full-disk encryption on the machine, and server-side encryption on the backup bucket.",
+        "Projects and quotas: accounts own their branches and share main, with no per-project limits.",
+        "Imports from Oracle and SQL Server: imports come from PostgreSQL, MySQL, MariaDB, MongoDB and files.",
+        "On macOS the installer cannot check the release signature, because macOS ships LibreSSL rather than OpenSSL 3; it checks every file against SHA256SUMS and warns, and FOX_REQUIRE_SIGNATURE=1 makes it stop instead.",
+        "What the Blackbox records, and what it does not, is set out on the Blackbox page.",
+      ],
+    },
+    {
+      kind: "code",
+      eyebrow: "Upgrades",
+      title: "Moving to a new release",
+      body: "fox update installs the newest signed release: a new engine, restarted servers and the Blackbox's own upgrades, with your data untouched and on the PostgreSQL major it already runs. fox check then says whether everything is healthy, and what to run when something is not.",
+      lines: ["$ fox update --check", "$ fox update", "$ fox check"],
+    },
+    {
+      kind: "code",
+      eyebrow: "Rolling back",
+      title: "Going back",
+      body: "fox update only moves forward. To go back to an earlier release, run the installer pinned to it; your data stays where it is. Take an export first, because an older release knows nothing about what a newer one added. A PostgreSQL major upgrade has its own way back until you finalise it.",
+      lines: ["$ fox backup export --out before-rollback.dump", `$ ${site.install.replace(/\| sh$/, "| FOX_VERSION=v2.2 sh")}`, "$ fox pg upgrade --rollback"],
+      note: "Replace v2.2 with the release you want. fox pg upgrade --rollback applies only while an upgrade's old databases are still kept.",
+    },
+  ],
+  related: [
+    { label: "Download", href: "/download" },
+    { label: "Changelog", href: "/changelog" },
+    { label: "Security", href: "/security" },
+  ],
+  cta: { title: "Try it on your own machine.", lede: "Install FoxByte in a few minutes, and fox check tells you if anything needs attention." },
 };
