@@ -356,10 +356,10 @@ export const whyPage: PageContent = {
         ["Run it yourself in production", "Yes, AGPL-3.0", "Not documented", "Yes, without branching or PITR", "No", "Yes, Apache-2.0", "Partly: the storage engine is closed"],
         ["Tamper-evident record of schema changes", "Yes: hash chain and signed anchors", "Audit log via pgAudit", "Audit logs and pgAudit", "Organisation audit log", "Not documented", "Not documented"],
         ["Stops an agent’s destructive SQL", "Yes: DROP, TRUNCATE and DML without WHERE", "Read-only mode and roles", "Read-only role; asks to confirm", "Yes: TRUNCATE and DML without WHERE", "No: isolation only", "No: isolation and review"],
-        ["Live row changes to clients", "Yes (Enterprise)", "No", "Yes", "No", "No", "No"],
+        ["Live row changes to clients", "Yes (Enterprise)", "Yes, in beta", "Yes", "No", "No", "No"],
         ["Storage", "Stock Postgres, local disk", "Separate compute and storage", "Stock Postgres per project", "Stock Postgres, local NVMe or EBS", "Stock Postgres on ZFS or LVM", "Postgres on network block storage"],
       ],
-      note: "Neon is now part of Databricks. Sources: each vendor’s branching, self-hosting, audit, MCP, realtime and architecture documentation.",
+      note: "Neon joined Databricks in May 2025; its database, Lakebase Postgres, is also offered on Databricks as Lakebase. Neon’s row rechecked on 23 October 2026. Sources: each vendor’s branching, self-hosting, audit, MCP, realtime and architecture documentation.",
     },
     {
       kind: "split",
