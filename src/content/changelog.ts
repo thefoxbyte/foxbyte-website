@@ -4,14 +4,19 @@ export const releases: Release[] = [
   {
     version: "Unreleased",
     date: "On main",
-    title: "Guardrails by impact, and a better SQL workbench",
+    title: "Guardrails by impact, a Blackbox that misses nothing it can see, and a better SQL workbench",
     items: [
       "Agent guardrails count rows changed, not WHERE clauses: a per-table limit on an agent’s UPDATE or DELETE, and a per-agent row budget over a time window (fox guardrail).",
       "Blackbox anchors can be kept in an Object Lock bucket (fox blackbox anchor-target), and fox-verify reads them from there.",
       "Copy results as TSV, CSV, Markdown, JSON or INSERTs, and stream a full result to CSV, JSON or Excel with fox export.",
       "Per-person query history, never the results, with saved queries and suggestions as you type (fox history).",
       "An object browser with each object’s CREATE script (fox schema), and a data grid to sort, filter and edit rows.",
-      "Fixes: a branch in use is no longer suspended, and Realtime wakes a suspended branch.",
+      "The Blackbox records what its event triggers miss: every five minutes a catalog scan writes changes made with the triggers stopped, and roles, memberships, databases and settings, which they never see (fox blackbox scan).",
+      "Row tracking: when each row of a tracked table was made and changed, and who changed it (fox track).",
+      "Personal-data discovery in Enterprise: scan a branch for where it holds personal data, JSON documents included, review findings from masked samples, and keep it current as new columns appear (fox pii).",
+      "An access review report in Enterprise: who can reach what, with which keys, and who has gone quiet (fox access review).",
+      "The console bundles its fonts, so opening it contacts no other site.",
+      "Fixes: a branch in use is no longer suspended, Realtime wakes a suspended branch and tells a client resuming from a point it cannot replay instead of silently skipping ahead, and a removed container takes its Docker volume with it.",
     ],
   },
   {
