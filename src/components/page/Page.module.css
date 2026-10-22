@@ -71,6 +71,20 @@
   animation-delay: calc(var(--intro-delay) + var(--d, 0s));
 }
 
+@keyframes slide {
+  from {
+    transform: translateY(16px);
+  }
+  to {
+    transform: none;
+  }
+}
+
+.riseText {
+  animation: slide 0.75s var(--ease) both;
+  animation-delay: calc(var(--intro-delay) + var(--d, 0s));
+}
+
 .h1 {
   font-size: clamp(38px, 5vw, 64px);
   font-weight: 800;

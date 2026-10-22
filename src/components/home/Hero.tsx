@@ -74,7 +74,7 @@ export function Hero() {
               </svg>
             </span>
           </h1>
-          <p className={`${styles.sub} ${styles.rise}`} style={{ "--d": ".45s" } as CSSProperties}>
+          <p className={`${styles.sub} ${styles.riseText}`} style={{ "--d": ".45s" } as CSSProperties}>
             FoxByte is PostgreSQL on servers you control. Its Blackbox records who changed what, and from which tool, in a tamper-evident hash chain, and with signed anchors kept off the machine (Enterprise) not even your own admins can rewrite it unnoticed. People and AI work on instant copies, so main stays exactly as you left it.
           </p>
           <div className={`${styles.ctas} ${styles.rise}`} style={{ "--d": ".6s" } as CSSProperties}>
