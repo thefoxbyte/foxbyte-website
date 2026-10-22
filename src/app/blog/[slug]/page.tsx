@@ -98,7 +98,7 @@ export default async function PostPage({ params }: Props) {
           publisher: { "@type": "Organization", name: site.name, logo: { "@type": "ImageObject", url: `${site.url}/brand/mark-light.png` } },
         }}
       />
-      <CtaBand title="Try it on your own data." lede="Install FoxByte with one command and see it for yourself." related={[...others.map((p) => ({ label: p.title, href: `/blog/${p.slug}` })), ...guideLinks]} />
+      <CtaBand title="Try it on your own data." lede="Install FoxByte in a few minutes and see it for yourself." related={[...others.map((p) => ({ label: p.title, href: `/blog/${p.slug}` })), ...guideLinks]} />
     </>
   );
 }
