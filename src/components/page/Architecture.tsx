@@ -1,7 +1,7 @@
 import styles from "./Architecture.module.css";
 
 const lanes = [
-  { y: 70, label: "Commit path", sub: "native latency, nothing else in the way" },
+  { y: 70, label: "Commit path", sub: "stock Postgres on local disk; connections through the gateway" },
   { y: 230, label: "Off the commit path", sub: "never waited on by a transaction" },
 ];
 

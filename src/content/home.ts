@@ -43,7 +43,7 @@ export const storySteps = [
   {
     key: "02 · Blackbox",
     title: "Every schema change, on record",
-    body: "Every CREATE, ALTER, DROP and GRANT is written down the moment it happens, with who made it and from which tool. Entries are chained, so nobody can quietly rewrite history, and any entry is a way back to main as it was just before.",
+    body: "Every change to a table, view, function or privilege is written down the moment it happens, with the login that made it and the tool it reported. Entries are hash-chained, so an edit shows, and any entry is a way back to main as it was just before.",
     enterprise: false,
   },
   {
@@ -55,7 +55,7 @@ export const storySteps = [
   {
     key: "04 · Protect",
     title: "Mistakes stop before they land",
-    body: "Dropping a table needs an admin. A DELETE without a WHERE is refused. An agent that tries to change more than 100 rows is stopped at row 101, and nothing is lost.",
+    body: "Dropping a table needs an admin. An agent’s DELETE or UPDATE without a WHERE is refused. In the next release, an agent that tries to change more than 100 rows is stopped at row 101, and nothing is lost.",
     enterprise: false,
   },
 ] as const;
@@ -119,7 +119,7 @@ export const faqs = [
   },
   {
     q: "Can AI agents damage my data?",
-    a: "They work on their own copy, never on main. Destructive commands are blocked, deletes without a WHERE are refused, and anything past 100 rows is stopped. An agent can propose changes, but only a person can approve them.",
+    a: "They work on their own copy, never on main. Destructive commands are blocked and deletes without a WHERE are refused; in the next release, anything past 100 rows of a table is stopped too. An agent can propose changes, but only a person can approve them.",
   },
   {
     q: "Will using FoxByte make my app open source?",
@@ -136,7 +136,7 @@ export const botPackets: Record<string, { packets: readonly string[]; mood?: Bot
   s0: { packets: ["branch qa · ready", "replica of main ✓"], mood: "replica" },
   s1: { packets: ["blackbox +1 · chain ✓"] },
   s2: { packets: ["UPDATE orders 1042 → shipped", "INSERT orders 1046", "UPDATE orders 1043 → paid"], mood: "stream" },
-  s3: { packets: ["✗ BBX01 · refused at row 101"], mood: "alert", bad: true },
+  s3: { packets: ["✗ BBX01 · DELETE without WHERE refused"], mood: "alert", bad: true },
   data: { packets: ["import mysql://…/shop ✓", "48 tables → branch shop"] },
   agents: { packets: ["agent key · 1 branch only"] },
   features: { packets: ["standby · streaming", "failover drill ✓"] },
@@ -147,7 +147,7 @@ export const botPackets: Record<string, { packets: readonly string[]; mood?: Bot
   "/product/branching": { packets: ["branch qa · ready", "replica of main ✓"], mood: "replica" },
   "/product/blackbox": { packets: ["blackbox verify · chain ✓"] },
   "/product/realtime": { packets: ["UPDATE orders 1042 → shipped", "INSERT orders 1046"], mood: "stream" },
-  "/product/guardrails": { packets: ["✗ BBX01 · refused at row 101"], mood: "alert", bad: true },
+  "/product/guardrails": { packets: ["✗ BBX01 · DELETE without WHERE refused"], mood: "alert", bad: true },
   "/product/time-travel": { packets: ["restore --to 14:07:32 ✓"] },
   "/product/console": { packets: ["GET :8080 → 200"] },
   "/ai-agents": { packets: ["agent key · 1 branch only"] },

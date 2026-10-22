@@ -41,6 +41,14 @@ const blocks: Block[] = [
     title: "Know what you installed",
     body: "Every release’s SHA256SUMS is signed with the FoxByte release key, which the installer checks where OpenSSL can. Each file has a GitHub build attestation, and each release an SBOM.",
     lines: ["$ gh attestation verify fox-darwin-arm64 --repo thefoxbyte/foxbyte"],
+    note: "The release key’s fingerprint is on the Security page. On macOS, set FOX_REQUIRE_SIGNATURE=1 to stop rather than warn when the signature cannot be checked.",
+  },
+  {
+    kind: "code",
+    eyebrow: "Updates",
+    title: "The one call home, and how to turn it off",
+    body: "fox start asks GitHub whether a newer release exists. It sends nothing about your data. Turn it off for good with one setting.",
+    lines: ["$ export FOX_NO_UPDATE_CHECK=1"],
   },
   {
     kind: "code",
@@ -65,7 +73,7 @@ export default function DownloadPage() {
         hero={{
           eyebrow: "Download",
           title: "Install FoxByte",
-          lede: "One command installs the fox CLI. A second brings up PostgreSQL 18, branching, the Blackbox and the console. Day to day, everything is a fox command on every system.",
+          lede: "One command installs the fox CLI. A second brings up PostgreSQL 18, branching, the Blackbox and the console, in a few minutes the first time. Day to day, everything is a fox command on every system.",
         }}
         trail={[{ label: "Download", href: "/download" }]}
       />

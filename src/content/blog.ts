@@ -20,7 +20,7 @@ export const posts: Post[] = [
   {
     slug: "agent-row-limit",
     title: "The agent row limit: why a row counter, and what it costs",
-    description: "We measured two ways to stop an AI agent’s runaway UPDATE or DELETE on a million-row table. One refuses it in 14.5 ms. Here is the data, including what it costs people.",
+    description: "We measured two ways to stop an AI agent’s runaway UPDATE or DELETE on a million-row table. One refuses it in 14.5 ms on a small test VM. Here is the data, including what it costs people. It ships in the next release.",
     date: "2026-10-16",
     readingMinutes: 5,
     tags: ["Guardrails", "Benchmarks"],

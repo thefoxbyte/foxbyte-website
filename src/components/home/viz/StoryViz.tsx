@@ -240,7 +240,7 @@ export function RefuseViz() {
       <div className={styles.cap}>
         {stopped ? <span style={{ color: "#ff7b66" }}>✗ refused at row 101 · nothing deleted</span> : <span>counting…</span>}
         <span>
-          <b>14.5 ms</b> on a million-row table
+          <b>14.5 ms</b> on a million-row table, 4-vCPU test VM · next release
         </span>
       </div>
     </div>

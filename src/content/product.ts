@@ -9,7 +9,7 @@ export const productOverview: PageContent = {
   crumb: "Product",
   meta: {
     title: "How FoxByte works",
-    description: "FoxByte keeps stock PostgreSQL 18 on local disk for native latency, and adds copy-on-write branches, the Blackbox, realtime, guardrails and backups beside the commit path.",
+    description: "FoxByte keeps stock PostgreSQL 18 on local disk, and adds copy-on-write branches, the Blackbox, realtime, guardrails and backups beside the commit path.",
   },
   hero: {
     eyebrow: "Product",
@@ -26,9 +26,9 @@ export const productOverview: PageContent = {
       lede: "Every capability maps to one job: branch, record, stream or protect.",
       items: [
         { title: "Branching", body: "A full, isolated copy of the whole database in seconds, for every developer, test or agent.", icon: "branch", href: "/product/branching" },
-        { title: "Blackbox", body: "Every schema change recorded with who made it, in a hash chain nobody can quietly rewrite.", icon: "box", href: "/product/blackbox" },
+        { title: "Blackbox", body: "Every schema change recorded with who made it, in a tamper-evident hash chain.", icon: "box", href: "/product/blackbox" },
         { title: "Realtime", body: "Every insert, update and delete as it commits, from your own server.", icon: "pulse", tag: "Enterprise", href: "/product/realtime" },
-        { title: "Guardrails", body: "Destructive commands blocked, runaway deletes stopped at row 101.", icon: "shield", href: "/product/guardrails" },
+        { title: "Guardrails", body: "Destructive commands blocked, deletes without a WHERE refused.", icon: "shield", href: "/product/guardrails" },
         { title: "Time travel & HA", body: "Restore to any second in the archived window, keep backups off the machine, fail over in one command.", icon: "rewind", href: "/product/time-travel" },
         { title: "Web console", body: "Dashboard, SQL editor, data grid and the Blackbox, served by the engine itself.", icon: "db", href: "/product/console" },
       ],
@@ -73,7 +73,7 @@ export const productPages: PageContent[] = [
     crumb: "Branching",
     meta: {
       title: "Instant Postgres branching",
-      description: "Copy-on-write branches of your whole PostgreSQL database: isolated, created in seconds regardless of size, suspended when idle and woken on the next connection.",
+      description: "Copy-on-write branches of your whole PostgreSQL database: isolated, created in seconds because nothing is copied until it changes, suspended when idle and woken on the next connection.",
     },
     hero: {
       eyebrow: "Branching",
@@ -138,7 +138,7 @@ export const productPages: PageContent[] = [
     crumb: "Blackbox",
     meta: {
       title: "Blackbox: a tamper-evident record of every schema change",
-      description: "Every CREATE, ALTER, DROP and GRANT recorded with who made it, human or agent, in an append-only hash chain with signed anchors kept off the machine.",
+      description: "Every change to a table, view, index, function or privilege recorded with who made it, human or agent, in an append-only hash chain with signed anchors kept off the machine.",
     },
     hero: {
       eyebrow: "Blackbox",
@@ -154,14 +154,14 @@ export const productPages: PageContent[] = [
         title: "Who, what and where",
         items: [
           { title: "Who", body: "The actor, an email or an agent such as agent-alice, and whether it was a person or an agent.", icon: "shield" },
-          { title: "What", body: "The command, the object and the full statement, for every CREATE, ALTER, DROP and GRANT.", icon: "box" },
-          { title: "Where", body: "The tool that sent it (application_name, for example cursor/opus), the branch and the session.", icon: "db" },
+          { title: "What", body: "The command, the object and the full statement, for every change to a table, view, index, function, type or privilege.", icon: "box" },
+          { title: "Where", body: "The branch, the session, and the tool as the client reports it (application_name, for example cursor/opus).", icon: "db" },
         ],
       },
       {
         kind: "split",
         eyebrow: "Tamper evidence",
-        title: "It cannot be quietly rewritten",
+        title: "Tamper-evident, then insider-proof",
         body: [
           "The table is append-only and every row is hash-chained to the one before it, so an edited or deleted entry breaks the chain and fox blackbox verify finds it.",
           "A database superuser could rewrite the rows and every hash after them. Anchors close that gap: every few minutes the engine signs a checkpoint of the chain with a key the database cannot read, and writes it outside the database. Copy them to an S3 bucket in Object Lock compliance mode and nobody can remove them, the bucket owner included.",
@@ -170,10 +170,24 @@ export const productPages: PageContent[] = [
           "Tamper-evident for free: the hash chain and fox blackbox verify are in every edition.",
           "Insider-proof in Enterprise: signed anchors on a schedule, kept where your own admins cannot rewrite them.",
           "Checking anchors stays free in every edition, including the standalone fox-verify.",
-          "Clients log in as their own Postgres role, so nobody can forge the recorded actor.",
+          "The recorded actor is the login, which a client cannot change. An application that shares one login between many people is recorded as that login.",
         ],
         visual: "anchor",
         reverse: true,
+      },
+      {
+        kind: "list",
+        id: "coverage",
+        eyebrow: "Scope",
+        title: "What it records, and what it does not",
+        lede: "So that nobody has to take “every change” on trust.",
+        items: [
+          "Recorded as it happens: CREATE and ALTER of tables, views, indexes, functions, types, triggers and policies; DROP of tables, views, indexes, sequences, schemas, types and functions; GRANT and REVOKE, though the entry does not name the object; TRUNCATE by anyone; an agent’s UPDATE and DELETE; every change the guardrails refused.",
+          "Not recorded: reads; a person’s INSERT, UPDATE and DELETE; dropping a trigger, policy, procedure, aggregate or foreign table; sequences, new schemas, extensions and comments.",
+          "Never seen by the event triggers, because they sit outside any one database: roles, role memberships, databases, tablespaces and settings. Other databases in the same Postgres are not recorded at all.",
+          "A database superuser can stop the event triggers for a session or for everyone, and what they change then is not recorded. Clients and agents log in without that power, so they cannot.",
+          "The next release adds a catalog scan: every five minutes it compares the schema with what it saw last, and records what the triggers missed and the global objects above, with who made the change marked unknown.",
+        ],
       },
       {
         kind: "code",
@@ -217,7 +231,7 @@ export const productPages: PageContent[] = [
     crumb: "Guardrails",
     meta: {
       title: "Postgres guardrails: stop destructive SQL before it runs",
-      description: "FoxByte blocks DROP and TRUNCATE by policy, refuses agent DELETE and UPDATE without a WHERE, and caps the rows an agent may change per statement and per hour.",
+      description: "FoxByte blocks DROP and TRUNCATE by policy, refuses agent DELETE and UPDATE without a WHERE, and from the next release caps the rows an agent may change per statement and per hour.",
     },
     hero: {
       eyebrow: "Guardrails",
@@ -235,14 +249,14 @@ export const productPages: PageContent[] = [
         items: [
           { title: "No silent drops", body: "DROP TABLE, DROP SCHEMA and TRUNCATE are blocked by policy unless an admin overrides them, and the attempt is recorded.", icon: "shield" },
           { title: "No WHERE, no run", body: "An agent’s UPDATE or DELETE without a WHERE is refused outright.", icon: "box" },
-          { title: "Row limits", body: "An agent may change at most 100 rows of a table per statement, and 1,000 rows of a table per hour.", icon: "pulse" },
+          { title: "Row limits", body: "In the next release: an agent may change at most 100 rows of a table per statement, and 1,000 rows of a table per hour.", icon: "pulse" },
         ],
       },
       {
         kind: "table",
         eyebrow: "Measured",
         title: "Why a row counter",
-        lede: "PostgreSQL 18, a 1,000,000-row table, median of seven rounds, in milliseconds.",
+        lede: "PostgreSQL 18 in a 4-vCPU, 4 GiB test VM, a 1,000,000-row table, median of seven rounds, in milliseconds. The row counter ships in the next release.",
         head: ["Case", "No guard", "Row counter", "Transition table"],
         rows: [
           ["A person updates every row", "2,443", "3,195", "2,653"],
@@ -256,7 +270,7 @@ export const productPages: PageContent[] = [
         kind: "code",
         eyebrow: "Tuning",
         title: "Change the limits per table",
-        body: "Both limits can be set per table and per branch, and fox policy check tells you whether a statement would be blocked before you run it. An admin can let a single statement through when it really is meant.",
+        body: "From the next release, both limits can be set per table and per branch. fox policy check tells you whether a statement would be blocked before you run it. An admin can let a single statement through when it really is meant.",
         lines: ["$ fox guardrail limit --table orders 500", "$ fox guardrail budget --table orders --per 1h 5000", "$ fox policy check \"DROP TABLE invoices\""],
       },
       {
