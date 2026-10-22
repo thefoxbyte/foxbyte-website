@@ -18,7 +18,7 @@ const structuredData = {
       name: site.name,
       url: site.url,
       logo: `${site.url}/brand/mark-light.png`,
-      sameAs: [site.github],
+      sameAs: [site.github, site.x, site.instagram],
     },
     {
       "@type": "WebSite",
