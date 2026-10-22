@@ -71,6 +71,14 @@ export const footerColumns = [
     ],
   },
   {
+    title: "Learn",
+    links: [
+      { label: "Postgres audit log", href: "/postgres-audit-log" },
+      { label: "Postgres branching", href: "/postgres-branching" },
+      { label: "FoxByte vs Database Lab", href: "/compare/database-lab" },
+    ],
+  },
+  {
     title: "Company",
     links: [
       { label: "About", href: "/company" },
