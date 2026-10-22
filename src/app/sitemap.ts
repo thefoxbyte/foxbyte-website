@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { posts } from "@/content/blog";
 import { legalDocs } from "@/content/legal";
 import { productPages } from "@/content/product";
+import { guidePages } from "@/content/guides";
 import { site } from "@/content/site";
 
 type Entry = { path: string; priority: number; changeFrequency: "weekly" | "monthly" | "yearly"; lastModified?: string };
@@ -30,6 +31,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const entries: Entry[] = [
     ...core,
     ...productPages.map((p) => ({ path: p.path, priority: 0.8, changeFrequency: "monthly" as const })),
+    ...guidePages.map((p) => ({ path: p.path, priority: 0.7, changeFrequency: "monthly" as const })),
     ...posts.map((p) => ({ path: `/blog/${p.slug}`, priority: 0.6, changeFrequency: "yearly" as const, lastModified: p.date })),
     ...legalDocs.map((d) => ({ path: `/legal/${d.slug}`, priority: 0.3, changeFrequency: "yearly" as const, lastModified: d.updated })),
   ];

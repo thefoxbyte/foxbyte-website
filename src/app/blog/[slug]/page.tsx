@@ -5,6 +5,7 @@ import { CtaBand } from "@/components/page/CtaBand";
 import { JsonLd } from "@/components/page/JsonLd";
 import { PageHero } from "@/components/page/PageHero";
 import { postBySlug, posts } from "@/content/blog";
+import { guideLinks } from "@/content/guides";
 import { site } from "@/content/site";
 import { pageMetadata } from "@/lib/metadata";
 import styles from "@/components/page/Prose.module.css";
@@ -97,7 +98,7 @@ export default async function PostPage({ params }: Props) {
           publisher: { "@type": "Organization", name: site.name, logo: { "@type": "ImageObject", url: `${site.url}/brand/mark-light.png` } },
         }}
       />
-      <CtaBand title="Try it on your own data." lede="Install FoxByte with one command and see it for yourself." related={others.map((p) => ({ label: p.title, href: `/blog/${p.slug}` }))} />
+      <CtaBand title="Try it on your own data." lede="Install FoxByte with one command and see it for yourself." related={[...others.map((p) => ({ label: p.title, href: `/blog/${p.slug}` })), ...guideLinks]} />
     </>
   );
 }
