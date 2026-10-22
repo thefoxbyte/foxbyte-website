@@ -20,7 +20,7 @@ type Motion = { nx: MotionValue<number>; ny: MotionValue<number>; sy: MotionValu
 function Tile({ icon, x, y, depth, size, i, nx, ny, sy }: (typeof tiles)[number] & Motion & { i: number }) {
   const tx = useTransform(nx, (v) => v * -46 * depth);
   const ty = useTransform([ny, sy], ([a, b]: number[]) => a * -34 * depth - b * 0.14 * depth);
-  const base = typeof document !== "undefined" && document.documentElement.dataset.intro ? 1.1 : 0.6;
+  const base = typeof document !== "undefined" && document.documentElement.dataset.intro ? 2.9 : 0.6;
   return (
     <m.div
       className={styles.tile}

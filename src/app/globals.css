@@ -122,7 +122,7 @@
 }
 
 :root[data-intro] {
-  --intro-delay: 0.65s;
+  --intro-delay: 2.45s;
 }
 
 ::view-transition-old(root),
