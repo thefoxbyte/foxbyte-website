@@ -29,6 +29,12 @@
   font-size: 15.5px;
 }
 
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 20px;
+}
+
 .channel a {
   font-weight: 600;
   color: var(--accent-ink);

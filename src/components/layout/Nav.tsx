@@ -1,5 +1,6 @@
 "use client";
 
+import { contactHref } from "@/content/contact";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -149,7 +150,7 @@ export function Nav() {
             GitHub
           </a>
           <ThemeToggle />
-          <Link href="/contact" className={`btn ghost sm ${styles.sales}`}>
+          <Link href={contactHref("enterprise")} className={`btn ghost sm ${styles.sales}`}>
             Contact sales
           </Link>
           <Magnetic className={`btn primary sm ${styles.install}`} href="/download">
@@ -183,7 +184,7 @@ export function Nav() {
                   </Link>
                 </m.div>
               ))}
-              <Link href="/contact" className={styles.sheetLink}>
+              <Link href={contactHref("enterprise")} className={styles.sheetLink}>
                 Contact sales
               </Link>
               <Link href="/download" className={`btn primary ${styles.sheetCta}`}>

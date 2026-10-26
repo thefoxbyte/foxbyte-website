@@ -303,7 +303,7 @@ export const productPages: PageContent[] = [
       tag: "Enterprise",
       title: "Every row change, live, on your servers",
       lede: "Subscribe to inserts, updates and deletes the moment they commit, straight from your own database. No third-party cloud in the middle.",
-      ctas: [{ label: "Talk to us", href: "/contact", primary: true }, { label: "Compare editions", href: "/pricing" }],
+      ctas: [{ label: "Talk to us", href: "/contact?topic=enterprise#contact-form", primary: true }, { label: "Compare editions", href: "/pricing" }],
       visual: "realtime",
     },
     blocks: [

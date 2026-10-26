@@ -168,7 +168,7 @@ export const pricingPage: PageContent = {
     eyebrow: "Pricing",
     title: "Safety is free. Scale is Enterprise.",
     lede: "Two editions built from one codebase. The command is fox either way, and moving between them never touches your data.",
-    ctas: [install, { label: "Talk to us", href: "/contact" }],
+    ctas: [install, { label: "Talk to us", href: "/contact?topic=enterprise#contact-form" }],
   },
   blocks: [
     {
@@ -307,7 +307,7 @@ export const securityPage: PageContent = {
       title: "Report a vulnerability privately",
       lede: "Please do not open a public issue for security problems. We would rather hear first, and we answer quickly.",
       items: [
-        { title: "Report", body: "Use GitHub’s private vulnerability reporting: the repository’s Security tab, then Report a vulnerability." },
+        { title: "Report", body: "Use GitHub’s private vulnerability reporting: the repository’s Security tab, then Report a vulnerability. No GitHub account? Email info@thefoxbyte.com with Security report in the subject." },
         { title: "Acknowledgement", body: "Within 3 business days." },
         { title: "Assessment", body: "Severity and whether we can reproduce it, within 7 days, then updates as we fix it and credit in the release notes if you want it." },
       ],
@@ -602,7 +602,7 @@ export const regulatedPage: PageContent = {
     eyebrow: "Regulated teams",
     title: "Evidence your auditors can check for themselves",
     lede: "Banks, insurers, health and public-sector teams have to show who changed a database, who approved it, and that the record was not edited afterwards. FoxByte keeps that evidence beside the data, on machines you control. It helps you meet your obligations; it does not make you compliant on its own.",
-    ctas: [{ label: "Talk to us", href: "/contact", primary: true }, { label: "Security", href: "/security" }],
+    ctas: [{ label: "Talk to us", href: "/contact?topic=enterprise#contact-form", primary: true }, { label: "Security", href: "/security" }],
     visual: "request",
   },
   blocks: [

@@ -1,6 +1,7 @@
 .form {
   display: grid;
   gap: 18px;
+  scroll-margin-top: 104px;
   padding: 32px;
   border-radius: 24px;
   background: var(--card);
