@@ -1,8 +1,11 @@
+import fs from "node:fs";
+import path from "node:path";
 import Link from "next/link";
 import { Fragment } from "react";
 import type { Block, GridItem } from "@/content/types";
 import { Check, Icon } from "@/components/ui/icons";
 import { FaqList } from "./FaqList";
+import { CastPlayer } from "./CastPlayer";
 import { JsonLd } from "./JsonLd";
 import { Reveal } from "./Reveal";
 import { Visual } from "./Visual";
@@ -120,6 +123,17 @@ function BlockView({ block }: { block: Block }) {
           </Reveal>
         </div>
       );
+    case "cast":
+      return (
+        <div className={styles.codeBlock}>
+          <div className={styles.splitCopy}>
+            {block.eyebrow && <span className="eyebrow">{block.eyebrow}</span>}
+            <h2 className="h2">{block.title}</h2>
+            {block.body && <p className={styles.para}>{block.body}</p>}
+          </div>
+          <CastPlayer src={block.src} title={block.screen} label={block.label} />
+        </div>
+      );
     case "steps":
       return (
         <>
@@ -204,10 +218,12 @@ function BlockView({ block }: { block: Block }) {
   }
 }
 
+const recorded = (b: Block) => b.kind !== "cast" || fs.existsSync(path.join(process.cwd(), "public", b.src));
+
 export function Blocks({ blocks }: { blocks: Block[] }) {
   return (
     <>
-      {blocks.map((b, i) => (
+      {blocks.filter(recorded).map((b, i) => (
         <section key={`${b.kind}-${b.title}`} id={b.id} className={`sec ${(b.alt ?? i % 2 === 0) ? "alt" : ""} ${styles.block}`}>
           <div className="wrap">
             <BlockView block={b} />

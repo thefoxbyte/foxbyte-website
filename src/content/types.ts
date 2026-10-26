@@ -32,7 +32,8 @@ export type Block =
   | (BlockBase & { kind: "steps"; items: { title: string; body: string }[] })
   | (BlockBase & { kind: "table"; head: string[]; rows: string[][]; note?: string })
   | (BlockBase & { kind: "list"; items: string[] })
-  | (BlockBase & { kind: "faq"; items: { q: string; a: string }[] });
+  | (BlockBase & { kind: "faq"; items: { q: string; a: string }[] })
+  | (BlockBase & { kind: "cast"; src: string; body?: string; screen: string; label: string });
 
 export type Hero = { eyebrow: string; title: string; lede: string; ctas?: Link[]; visual?: VisualKey; tag?: string };
 
