@@ -1,6 +1,8 @@
-import { ContactForm } from "@/components/page/ContactForm";
+import { Suspense } from "react";
+import { ContactForm, ContactFormFromLink } from "@/components/page/ContactForm";
 import { PageHero } from "@/components/page/PageHero";
 import { site } from "@/content/site";
+import { bugIssueHref, contactHref, securityAdvisoryHref, securityMailHref } from "@/content/contact";
 import { pageMetadata } from "@/lib/metadata";
 import styles from "./contact.module.css";
 
@@ -10,12 +12,14 @@ export const metadata = pageMetadata({
   path: "/contact",
 });
 
-const channels = [
-  { title: "Email", body: "Write to us directly at info@thefoxbyte.com. We reply within 24 hours.", href: "mailto:info@thefoxbyte.com", label: "info@thefoxbyte.com", external: false },
-  { title: "Enterprise", body: "Licences and support for FoxByte on your own hardware. Choose Enterprise in the form and the team that builds FoxByte replies.", href: "#contact-name", label: "Use the form", external: false },
-  { title: "Bugs", body: "Found something broken? Send the steps to reproduce it through the form, choosing Bug report.", href: "#contact-topic", label: "Report a bug", external: false },
-  { title: "Security", body: "Please report vulnerabilities privately through GitHub’s security advisories, never in public.", href: `${site.github}/security`, label: "Report privately", external: true },
-  { title: "Follow FoxByte", body: "Releases and news on X and Instagram, as @getfoxbyte.", href: site.x, label: "Follow on X", external: true, also: { href: site.instagram, label: "Instagram" } },
+type Channel = { title: string; body: string; links: { label: string; href: string }[] };
+
+const channels: Channel[] = [
+  { title: "Email", body: "Write to us directly. We reply within 24 hours.", links: [{ label: "info@thefoxbyte.com", href: "mailto:info@thefoxbyte.com" }] },
+  { title: "Enterprise", body: "Licences and support for FoxByte on your own hardware. The team that builds FoxByte replies.", links: [{ label: "Ask about Enterprise", href: contactHref("enterprise") }] },
+  { title: "Bugs", body: "Open a GitHub issue, where others with the same problem can find it. For a bug that involves your own data, send it to us privately instead. Security problems never go in a public issue.", links: [{ label: "Open an issue on GitHub", href: bugIssueHref }, { label: "Report a bug privately", href: contactHref("bug") }] },
+  { title: "Security", body: "Report vulnerabilities privately through GitHub, never in public. No GitHub account? Email us with Security report in the subject.", links: [{ label: "Report on GitHub", href: securityAdvisoryHref }, { label: "Email info@thefoxbyte.com", href: securityMailHref }] },
+  { title: "Follow FoxByte", body: "Releases and news on X and Instagram, as @getfoxbyte.", links: [{ label: "Follow on X", href: site.x }, { label: "Instagram", href: site.instagram }] },
 ];
 
 export default function ContactPage() {
@@ -27,20 +31,24 @@ export default function ContactPage() {
       />
       <section className="sec" style={{ paddingTop: 0 }}>
         <div className={`wrap ${styles.grid}`}>
-          <ContactForm />
+          <Suspense fallback={<ContactForm />}>
+            <ContactFormFromLink />
+          </Suspense>
           <aside className={styles.side} aria-label="Other ways to reach us">
             {channels.map((c) => (
               <div key={c.title} className={styles.channel}>
                 <h2>{c.title}</h2>
                 <p>{c.body}</p>
-                <a href={c.href} {...(c.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}>
-                  {c.label} →
-                </a>
-                {"also" in c && c.also && (
-                  <a href={c.also.href} target="_blank" rel="noopener noreferrer">
-                    {c.also.label} →
-                  </a>
-                )}
+                <div className={styles.links}>
+                  {c.links.map((l) => {
+                    const external = l.href.startsWith("http");
+                    return (
+                      <a key={l.href} href={l.href} {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}>
+                        {l.label} →
+                      </a>
+                    );
+                  })}
+                </div>
               </div>
             ))}
           </aside>
