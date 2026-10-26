@@ -61,7 +61,7 @@ function oneLine(value: string) {
 
 async function sendWithResend(entry: Entry): Promise<"ok" | "failed"> {
   const to = (process.env.CONTACT_TO || "info@thefoxbyte.com").split(",").map((a) => a.trim()).filter(Boolean);
-  const from = process.env.CONTACT_FROM || "FoxByte website <website@thefoxbyte.com>";
+  const from = process.env.CONTACT_FROM || "FoxByte <hello@contact.thefoxbyte.com>";
   const who = `${oneLine(entry.name)}${entry.company ? `, ${oneLine(entry.company)}` : ""}`;
   const text = `${entry.topic} enquiry from ${who} <${entry.email}>\n\n${entry.message}\n\nReply to this email to answer them directly.`;
   const html = `<p><strong>${escapeHtml(entry.topic)}</strong> enquiry from ${escapeHtml(who)} &lt;<a href="mailto:${escapeHtml(entry.email)}">${escapeHtml(entry.email)}</a>&gt;</p><p style="white-space:pre-wrap">${escapeHtml(entry.message)}</p><p style="color:#5d6676">Reply to this email to answer them directly.</p>`;
