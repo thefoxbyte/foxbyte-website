@@ -73,7 +73,7 @@ export const legalDocs: LegalDoc[] = [
       },
       {
         heading: "If you contact us",
-        paragraphs: ["The contact form sends your name, work email, company and message by email to info@thefoxbyte.com, through Resend, the email delivery service we use, so we can reply. We use it for that and nothing else."],
+        paragraphs: ["The contact form sends your name, work email, company and message by email to info@thefoxbyte.com, through Resend, the email delivery service we use, so we can reply, and sends you one email saying we have your message. We use them for that and nothing else.", "To keep automated spam out, the form runs Cloudflare Turnstile, which checks in your browser that a person is sending it. It loads only on the contact page, from challenges.cloudflare.com, and Cloudflare handles that check under its own privacy policy."],
       },
       {
         heading: "Server logs",

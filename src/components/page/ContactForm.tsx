@@ -6,13 +6,17 @@ import { AnimatePresence } from "motion/react";
 import * as m from "motion/react-m";
 import { Arrow } from "@/components/ui/icons";
 import { contactTopics } from "@/content/contact";
+import { Turnstile } from "./Turnstile";
 import styles from "./ContactForm.module.css";
 
-type Status = "idle" | "sending" | "sent" | "error" | "unavailable";
+type Status = "idle" | "sending" | "sent" | "error" | "unavailable" | "challenge";
 
-const messages: Record<"error" | "unavailable", string> = {
+const turnstileSiteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
+
+const messages: Record<"error" | "unavailable" | "challenge", string> = {
   error: "That didn’t go through. Check the fields and try again in a moment.",
   unavailable: "We couldn’t take your message right now. Please email info@thefoxbyte.com instead.",
+  challenge: "Please complete the check above the button, then send again.",
 };
 
 export function ContactFormFromLink() {
@@ -24,6 +28,7 @@ export function ContactFormFromLink() {
 export function ContactForm({ initialTopic, focus = false }: { initialTopic?: string; focus?: boolean }) {
   const [status, setStatus] = useState<Status>("idle");
   const [topic, setTopic] = useState(initialTopic ?? contactTopics[0].label);
+  const [attempt, setAttempt] = useState(0);
   const formRef = useRef<HTMLFormElement>(null);
   const current = contactTopics.find((t) => t.label === topic) ?? contactTopics[0];
 
@@ -47,11 +52,13 @@ export function ContactForm({ initialTopic, focus = false }: { initialTopic?: st
         form.reset();
         setTopic(current.label);
       } else {
-        setStatus(res.status === 503 ? "unavailable" : "error");
+        const reason = (await res.json().catch(() => ({}))) as { error?: string };
+        setStatus(res.status === 503 ? "unavailable" : reason.error === "challenge" ? "challenge" : "error");
       }
     } catch {
       setStatus("error");
     }
+    setAttempt((n) => n + 1);
   };
 
   return (
@@ -88,6 +95,7 @@ export function ContactForm({ initialTopic, focus = false }: { initialTopic?: st
         <span>Website</span>
         <input id="contact-website" name="website" type="text" tabIndex={-1} autoComplete="off" />
       </label>
+      {turnstileSiteKey && <Turnstile key={attempt} siteKey={turnstileSiteKey} />}
       <div className={styles.actions}>
         <button type="submit" className="btn primary" disabled={status === "sending"}>
           {status === "sending" ? "Sending…" : "Send message"}
@@ -99,7 +107,7 @@ export function ContactForm({ initialTopic, focus = false }: { initialTopic?: st
               ✓ Sent. We’ll reply to your email within 24 hours.
             </m.p>
           )}
-          {(status === "error" || status === "unavailable") && (
+          {(status === "error" || status === "unavailable" || status === "challenge") && (
             <m.p key={status} className={styles.bad} role="alert" initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
               {messages[status]}
             </m.p>

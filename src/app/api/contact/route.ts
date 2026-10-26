@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-type Payload = { name?: unknown; email?: unknown; company?: unknown; topic?: unknown; message?: unknown; website?: unknown };
+type Payload = { name?: unknown; email?: unknown; company?: unknown; topic?: unknown; message?: unknown; website?: unknown; "cf-turnstile-response"?: unknown };
 
 const limits = { name: 120, email: 200, company: 160, topic: 40, message: 4000 };
 const topics = new Set(["Enterprise", "Partnership", "Bug report", "Press", "Other"]);
@@ -43,10 +43,49 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: false, error: "invalid" }, { status: 400 });
   }
 
+  const human = await passedChallenge(clean(body["cf-turnstile-response"], 4096), ip);
+  if (human === "failed") return NextResponse.json({ ok: false, error: "challenge" }, { status: 400 });
+
   const delivered = process.env.RESEND_API_KEY ? await sendWithResend(entry) : await sendToWebhook(entry);
   if (delivered === "not_configured") return NextResponse.json({ ok: false, error: "not_configured" }, { status: 503 });
   if (delivered !== "ok") return NextResponse.json({ ok: false, error: "upstream" }, { status: 502 });
+  if (human === "passed" && process.env.RESEND_API_KEY && process.env.CONTACT_AUTOREPLY !== "off") await sendAcknowledgement(entry.email);
   return NextResponse.json({ ok: true });
+}
+
+async function passedChallenge(token: string, ip: string): Promise<"passed" | "failed" | "not_configured"> {
+  const secret = process.env.TURNSTILE_SECRET_KEY;
+  if (!secret) return "not_configured";
+  if (!token) return "failed";
+  try {
+    const form = new URLSearchParams({ secret, response: token });
+    if (ip !== "local") form.set("remoteip", ip);
+    const res = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", { method: "POST", body: form, signal: AbortSignal.timeout(8000) });
+    const outcome = (await res.json()) as { success?: boolean; "error-codes"?: string[] };
+    if (!outcome.success) console.error("contact: Turnstile refused the token", outcome["error-codes"]);
+    return outcome.success ? "passed" : "failed";
+  } catch (error) {
+    console.error("contact: Turnstile did not answer", error);
+    return "failed";
+  }
+}
+
+async function sendAcknowledgement(email: string) {
+  const team = (process.env.CONTACT_TO || "info@thefoxbyte.com").split(",")[0].trim();
+  const from = process.env.CONTACT_FROM || "FoxByte <hello@contact.thefoxbyte.com>";
+  const text = "Hello,\n\nThanks for writing to FoxByte. We have your message, and someone from the team will reply within 24 hours.\n\nIf you did not send us a message, you can ignore this email.\n\nFoxByte\nhttps://github.com/thefoxbyte/foxbyte";
+  const html = "<p>Hello,</p><p>Thanks for writing to FoxByte. We have your message, and someone from the team will reply within 24 hours.</p><p style=\"color:#5d6676\">If you did not send us a message, you can ignore this email.</p><p>FoxByte</p>";
+  try {
+    const res = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: { authorization: `Bearer ${process.env.RESEND_API_KEY}`, "content-type": "application/json" },
+      body: JSON.stringify({ from, to: [email], reply_to: team, subject: "We have your message", text, html }),
+      signal: AbortSignal.timeout(8000),
+    });
+    if (!res.ok) console.error("contact: Resend refused the acknowledgement", res.status, (await res.text()).slice(0, 300));
+  } catch (error) {
+    console.error("contact: the acknowledgement was not sent", error);
+  }
 }
 
 type Entry = { name: string; email: string; company: string; topic: string; message: string };
