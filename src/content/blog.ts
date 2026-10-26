@@ -18,6 +18,127 @@ export type Post = {
 
 export const posts: Post[] = [
   {
+    slug: "what-the-blackbox-proves",
+    title: "What the Blackbox proves to an auditor, and what it does not",
+    description: "An auditor asks who changed the database, who approved it, and how you know the answers were not edited. What FoxByte’s Blackbox answers today, the commands that show it, and where it stops.",
+    date: "2026-10-26",
+    readingMinutes: 6,
+    tags: ["Blackbox", "Regulated teams"],
+    sections: [
+      {
+        paragraphs: [
+          "Sooner or later someone asks three questions about a production database. Who changed it? Who approved the change? And how do you know the answers were not edited afterwards? This is what FoxByte’s Blackbox answers, the commands that show it, and, just as plainly, where it stops.",
+        ],
+      },
+      {
+        heading: "Who changed it",
+        paragraphs: [
+          "Every change to a table, view, index, function, type, trigger, policy or privilege is written down by event triggers inside the database, in the same transaction as the change itself. If the change rolls back, so does its entry; if it commits, the entry is there.",
+          "Each entry names the login role that made it. The gateway logs every person in as their own Postgres role and every agent as an agent role, and a client cannot change its login, so that part cannot be forged. The tool, application_name, is whatever the client says it is: useful for reading, not proof. An application that shares one login between many people is recorded as that login.",
+        ],
+        bullets: [
+          "Also recorded: TRUNCATE from anyone, an agent’s UPDATE and DELETE, once per statement, and every change the guardrails refused, as BLOCKED.",
+          "Not recorded: reads, and a person’s INSERT, UPDATE and DELETE.",
+        ],
+        code: ["$ fox blackbox", "$ fox blackbox entries --limit 20"],
+      },
+      {
+        heading: "How you know it was not edited",
+        paragraphs: [
+          "The record is an append-only table, and each entry carries a hash of the one before it. Edit or delete an entry and every hash after it stops matching, which fox blackbox verify finds in every edition.",
+          "A database superuser could rewrite the rows and recompute every hash after them. That is what anchors are for. On a schedule, the engine signs a checkpoint of the chain with an Ed25519 key the database cannot read and writes it outside the database. fox blackbox integrity, or the standalone fox-verify with the public key, checks the record against them. Writing anchors is part of Enterprise; checking them is free, so an auditor never needs a licence to verify you.",
+          "Anchors prove something only if they live where the people being audited cannot change them. With a remote backup target, every anchor is copied to the bucket too; make it a bucket in Object Lock compliance mode, controlled by someone other than the database administrators.",
+        ],
+        code: ["$ fox blackbox verify", "$ fox blackbox integrity", "$ fox blackbox anchor-key"],
+      },
+      {
+        heading: "Who approved it",
+        paragraphs: [
+          "Schema changes can reach main through a change request: prepared on a branch, reviewed statement by statement, and applied in one transaction by someone allowed to manage main. An agent can ask and never approve. The request keeps who asked, who approved and what was applied, and the Blackbox keeps each statement attributed to whoever wrote it.",
+          "One limit to state to your auditor today: FoxByte stops an agent approving its own request, but not a person. Someone who can manage main can ask and approve the same change, and the record shows they did both. Put the two-person rule in your process until the product enforces it.",
+        ],
+      },
+      {
+        heading: "Where it stops",
+        paragraphs: ["A record is only as trustworthy as the account of its gaps. These are the Blackbox’s today."],
+        bullets: [
+          "A database superuser can stop the event triggers, for one session with SET event_triggers = off or SET session_replication_role = replica, or for everyone by disabling them, and what they change meanwhile is not recorded. Anchors still prove the recorded history was not rewritten; they cannot show what was never written.",
+          "Roles, role memberships, databases, tablespaces and settings live outside any one database, so event triggers never see them. Nor do they record dropping a trigger, a policy, a procedure, an aggregate or a foreign table.",
+          "The next release closes most of this: every five minutes a catalog scan compares the schema with what it saw last, and records what the triggers missed, and those global objects, with who made the change marked unknown.",
+          "Someone with root on the machine can read the disk and the anchor key there. For them, anchors kept elsewhere are the proof, and nothing on the machine itself can be.",
+        ],
+      },
+      {
+        heading: "What to hand over",
+        table: {
+          head: ["The question", "The evidence", "The command"],
+          rows: [
+            ["Who changed the schema, and when?", "The Blackbox’s entries", "fox blackbox"],
+            ["Was the record edited?", "The hash chain", "fox blackbox verify"],
+            ["Was it rewritten wholesale?", "Signed anchors outside the database", "fox blackbox integrity, fox-verify"],
+            ["Who approved the production change?", "The change request", "fox request show"],
+            ["Who signed in or became an admin?", "The security log, chained and anchored the same way", "fox audit verify"],
+            ["Can we have all of it?", "Every entry as JSON lines (Enterprise)", "fox blackbox export"],
+          ],
+        },
+        paragraphs: ["The Blackbox page sets out the full scope, entry by entry, and the regulated teams page maps it to what auditors ask."],
+      },
+    ],
+  },
+  {
+    slug: "maker-checker-schema-changes",
+    title: "Maker-checker for schema changes: one asks, another approves",
+    description: "Separation of duties for database changes: prepare a change on a full-size branch, review the exact statements, and apply them to main in one transaction. How FoxByte’s change requests work, and their one limit today.",
+    date: "2026-10-26",
+    readingMinutes: 5,
+    tags: ["Change requests", "Regulated teams"],
+    sections: [
+      {
+        paragraphs: [
+          "Banks call it maker-checker; everyone else calls it review. The person or agent who prepares a change to production is not the one who puts it there, and both steps leave a record. FoxByte’s change requests are that control for schema changes.",
+        ],
+      },
+      {
+        heading: "Make the change on a branch",
+        paragraphs: [
+          "A branch is a full copy of main, made in seconds, so a migration is tried against real data at full size rather than a sample. Everything it runs is recorded in the branch’s Blackbox, attributed to the login that ran it.",
+        ],
+        code: ["$ fox branch create add-invoices-index", "$ psql \"postgresql://dbadmin:<API_KEY>@localhost:6432/add-invoices-index?sslmode=require\""],
+      },
+      {
+        heading: "Ask, then check",
+        paragraphs: [
+          "fox branch request lists the statements the branch has that main does not, in the order they ran, and opens a request. Nothing is applied. A reviewer reads exactly what would run.",
+        ],
+        code: ["$ fox branch request add-invoices-index --to main", "$ fox request list --open", "$ fox request show 3"],
+      },
+      {
+        heading: "Apply, all or nothing",
+        paragraphs: [
+          "Approving applies the statements to main in one transaction: all of them, or none. Rejecting leaves main untouched. Either can carry a note saying why.",
+          "A request is refused rather than half-applied when main has changed the same object since the branch was made, when main’s guardrails would block one of its statements, or when there is nothing to apply.",
+        ],
+        code: ["$ fox request approve 3 --note \"Reviewed with the payments team\"", "$ fox request reject 4 --note \"Drops a column the reports still read\""],
+      },
+      {
+        heading: "Who may approve",
+        paragraphs: [
+          "Approving needs the right to manage the target: an admin for main, the owner for any other branch. An agent’s key can manage nothing, so an agent can prepare and ask, and never approve its own change.",
+          "The limit to know today: FoxByte does not stop a person approving their own request. Someone who can manage main can ask and approve the same change, and the record shows that they did both. Until the product enforces two people, make it a rule in your process, and check the requests list in your reviews.",
+        ],
+      },
+      {
+        heading: "What is kept",
+        bullets: [
+          "The request: who asked, who approved or rejected, the note, and the statements, in order.",
+          "On main, the Blackbox records each applied statement, still attributed to whoever wrote it on the branch.",
+          "Those Blackbox entries are hash-chained like every other, and anchored in Enterprise.",
+          "Change requests carry schema only. No data moves between branches.",
+        ],
+      },
+    ],
+  },
+  {
     slug: "agent-row-limit",
     title: "The agent row limit: why a row counter, and what it costs",
     description: "We measured two ways to stop an AI agent’s runaway UPDATE or DELETE on a million-row table. One refuses it in 14.5 ms on a small test VM. Here is the data, including what it costs people. It ships in the next release.",
@@ -98,7 +219,7 @@ export const posts: Post[] = [
         paragraphs: [
           "Anchors are only as safe as where they live. By default they are written read-only beside the install, which proves nothing against the person who runs that machine. Point them at a bucket with Object Lock in compliance mode, ideally in an account the database administrators do not control, and nobody can delete or overwrite them before the retention ends, the bucket’s owner included.",
         ],
-        code: ["$ fox blackbox anchor-target set s3://audit-anchors …", "$ fox blackbox anchor-key", "$ fox blackbox integrity"],
+        code: ["$ fox blackbox anchor-target set s3://audit-anchors …   # next release", "$ fox blackbox anchor-key", "$ fox blackbox integrity"],
       },
       {
         heading: "The format is public",
