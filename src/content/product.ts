@@ -190,6 +190,15 @@ export const productPages: PageContent[] = [
         ],
       },
       {
+        kind: "cast",
+        eyebrow: "See it run",
+        title: "Recorded, refused, verified",
+        body: "A real session: a change on a branch goes on the record, a DROP TABLE is refused and recorded as BLOCKED, and fox blackbox verify checks the chain.",
+        src: "/demo/fox-demo.cast",
+        screen: "you@laptop — fox",
+        label: "A recorded terminal session: a CREATE TABLE is recorded in the Blackbox, a DROP TABLE is refused by policy and recorded as blocked, and fox blackbox verify reports the chain intact.",
+      },
+      {
         kind: "code",
         eyebrow: "Undo",
         title: "A way back, not only evidence",

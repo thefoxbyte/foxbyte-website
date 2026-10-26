@@ -25,6 +25,15 @@ const blocks: Block[] = [
     ],
   },
   {
+    kind: "cast",
+    eyebrow: "See it run",
+    title: "A branch, a refused DROP, a verified record",
+    body: "A real session on FoxByte, recorded, not acted: a branch of main in seconds, a change the Blackbox records, a DROP TABLE the guardrail refuses, and the hash chain checked.",
+    src: "/demo/fox-demo.cast",
+    screen: "you@laptop — fox",
+    label: "A recorded terminal session: fox branch create makes a copy of main, a CREATE TABLE is recorded in the Blackbox, a DROP TABLE is refused by policy, and fox blackbox verify reports the chain intact.",
+  },
+  {
     kind: "steps",
     eyebrow: "After install",
     title: "Your first five minutes",
