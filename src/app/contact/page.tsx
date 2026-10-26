@@ -11,6 +11,7 @@ export const metadata = pageMetadata({
 });
 
 const channels = [
+  { title: "Email", body: "Write to us directly at info@thefoxbyte.com. We reply within 24 hours.", href: "mailto:info@thefoxbyte.com", label: "info@thefoxbyte.com", external: false },
   { title: "Enterprise", body: "Licences and support for FoxByte on your own hardware. Choose Enterprise in the form and the team that builds FoxByte replies.", href: "#contact-name", label: "Use the form", external: false },
   { title: "Bugs", body: "Found something broken? Send the steps to reproduce it through the form, choosing Bug report.", href: "#contact-topic", label: "Report a bug", external: false },
   { title: "Security", body: "Please report vulnerabilities privately through GitHub’s security advisories, never in public.", href: `${site.github}/security`, label: "Report privately", external: true },
@@ -21,7 +22,7 @@ export default function ContactPage() {
   return (
     <>
       <PageHero
-        hero={{ eyebrow: "Contact", title: "Talk to us", lede: "Tell us what you want your database to do. We read every message, and Enterprise enquiries get a reply from the team that builds FoxByte." }}
+        hero={{ eyebrow: "Contact", title: "Talk to us", lede: "Tell us what you want your database to do. We read every message and reply within 24 hours, and Enterprise enquiries get a reply from the team that builds FoxByte." }}
         trail={[{ label: "Contact", href: "/contact" }]}
       />
       <section className="sec" style={{ paddingTop: 0 }}>

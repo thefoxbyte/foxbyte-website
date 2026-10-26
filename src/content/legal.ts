@@ -46,7 +46,7 @@ export const legalDocs: LegalDoc[] = [
     slug: "privacy",
     title: "Website privacy",
     description: "What this website stores in your browser and what it sends anywhere: very little, and nothing for tracking.",
-    updated: "2026-10-20",
+    updated: "2026-10-26",
     sections: [
       {
         paragraphs: ["This page covers the FoxByte website only. FoxByte the database runs on your own machines and does not send your data to us; how it protects your data is on the data privacy page at /privacy."],
@@ -73,7 +73,7 @@ export const legalDocs: LegalDoc[] = [
       },
       {
         heading: "If you contact us",
-        paragraphs: ["The contact form sends your name, work email, company and message to the FoxByte team so we can reply. We use it for that and nothing else."],
+        paragraphs: ["The contact form sends your name, work email, company and message by email to info@thefoxbyte.com, through Resend, the email delivery service we use, so we can reply. We use it for that and nothing else."],
       },
       {
         heading: "Server logs",

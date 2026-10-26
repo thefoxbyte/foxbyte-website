@@ -10,7 +10,7 @@ type Status = "idle" | "sending" | "sent" | "error" | "unavailable";
 
 const messages: Record<"error" | "unavailable", string> = {
   error: "That didn’t go through. Check the fields and try again in a moment.",
-  unavailable: "We couldn’t take your message right now. Please try again a little later.",
+  unavailable: "We couldn’t take your message right now. Please email info@thefoxbyte.com instead.",
 };
 
 export function ContactForm() {
@@ -78,7 +78,7 @@ export function ContactForm() {
         <AnimatePresence mode="wait">
           {status === "sent" && (
             <m.p key="sent" className={styles.ok} role="status" initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
-              ✓ Sent. We’ll reply to your email soon.
+              ✓ Sent. We’ll reply to your email within 24 hours.
             </m.p>
           )}
           {(status === "error" || status === "unavailable") && (
